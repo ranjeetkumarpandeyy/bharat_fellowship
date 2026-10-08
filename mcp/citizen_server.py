@@ -1,8 +1,7 @@
 import os
 from typing import Any
 
-from mcp.server.mcpserver import MCPServer, Context
-from mcp.server.auth.provider import AccessToken
+from mcp.server.mcpserver import MCPServer
 from mcp.server.auth.settings import AuthSettings
 from mcp.server.auth.middleware.auth_context import get_access_token
 
@@ -28,16 +27,19 @@ server = MCPServer(
     ),
 )
 
+
 def client() -> PortalClient:
     token = get_access_token()
     if not token or not token.subject:
         raise RuntimeError("Authentication required")
     return PortalClient(token.subject, "citizen")
 
+
 @server.tool()
 def who_am_i() -> dict[str, Any]:
     """Return the authenticated citizen identity."""
     return client().me()
+
 
 @server.tool()
 def check_pension_eligibility(
@@ -47,8 +49,9 @@ def check_pension_eligibility(
     block: str,
     bank_account: str,
     ifsc: str = "",
+    has_age_proof: bool = False,
 ) -> dict[str, Any]:
-    """Check whether the supplied application data passes the portal's validation rules."""
+    """Check supplied application data against the portal's validation rules."""
     try:
         return client().eligibility({
             "applicant_name": applicant_name,
@@ -57,9 +60,20 @@ def check_pension_eligibility(
             "block": block,
             "bank_account": bank_account,
             "ifsc": ifsc,
+            "has_age_proof": has_age_proof,
         })
     except PortalError as e:
         return {"ok": False, "error": str(e)}
+
+
+@server.tool()
+def upload_age_proof(filename: str, content_base64: str) -> dict[str, Any]:
+    """Upload the citizen's age-proof document before submitting an application."""
+    try:
+        return client().upload(filename, content_base64)
+    except PortalError as e:
+        return {"ok": False, "error": str(e)}
+
 
 @server.tool()
 def apply_for_pension(
@@ -74,10 +88,7 @@ def apply_for_pension(
     husband_name: str = "",
     age_proof_path: str = "",
 ) -> dict[str, Any]:
-    """Submit an old-age pension application through the same portal validation path as the web form.
-
-    age_proof_path must identify a document already uploaded through the agent upload API.
-    """
+    """Submit an old-age pension application using the portal's validation path."""
     try:
         return client().submit({
             "applicant_name": applicant_name,
@@ -94,6 +105,7 @@ def apply_for_pension(
     except PortalError as e:
         return {"ok": False, "error": str(e)}
 
+
 @server.tool()
 def get_my_application() -> dict[str, Any]:
     """Get the authenticated citizen's latest application."""
@@ -102,6 +114,7 @@ def get_my_application() -> dict[str, Any]:
     except PortalError as e:
         return {"ok": False, "error": str(e)}
 
+
 @server.tool()
 def withdraw_my_pending_application() -> dict[str, Any]:
     """Withdraw the authenticated citizen's own pending application."""
@@ -109,6 +122,7 @@ def withdraw_my_pending_application() -> dict[str, Any]:
         return client().withdraw()
     except PortalError as e:
         return {"ok": False, "error": str(e)}
+
 
 if __name__ == "__main__":
     server.run(
