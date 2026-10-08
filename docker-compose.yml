@@ -58,6 +58,31 @@ services:
     depends_on:
       - app
 
+  eval-runner:
+    profiles: ["eval"]
+    build:
+      context: ./evals
+      dockerfile: Dockerfile
+    environment:
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8000}
+      CITIZEN_MCP_URL: ${CITIZEN_MCP_URL:-http://localhost:8101/}
+      OFFICER_MCP_URL: ${OFFICER_MCP_URL:-http://localhost:8102/}
+      EVAL_CITIZEN_CONNECT_URL: http://citizen-mcp:8101/
+      EVAL_OFFICER_CONNECT_URL: http://officer-mcp:8102/
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: sewasetu
+      DB_USER: sewasetu
+      DB_PASSWORD: sewasetu123
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+    volumes:
+      - ./evals:/evals
+    depends_on:
+      - db
+      - app
+      - citizen-mcp
+      - officer-mcp
+
 volumes:
   pgdata:
   uploads:
