@@ -1,0 +1,280 @@
+[
+  {
+    "id": "eligible_sonari_ram_prasad",
+    "name": "Ram Prasad",
+    "age": 67,
+    "dob": "15/04/1959",
+    "mobile": "9000000001",
+    "village": "Lakshmi Gaon",
+    "block": "Sonari",
+    "bank_account": "123456789012",
+    "ifsc": "SBIN0003077",
+    "speaks_like": "Simple Hindi. Short sentences. He is polite but not comfortable with technical words or long forms.",
+    "situation": "Ram is a 67-year-old daily-wage worker who no longer gets regular work. His grandson normally helps him with phones and online forms, but today Ram is speaking to the assistant himself.",
+    "what_he_knows": "He knows that old people can get a pension and that the amount is 250 rupees per month. He does not know the online application steps.",
+    "what_he_wants": "He wants to apply for the old-age pension and receive an application number.",
+    "likely_conversation": [
+      "I am 67 years old. Can I get the old-age pension?",
+      "I do not understand online forms. Please tell me one thing at a time.",
+      "My village is Lakshmi Gaon and my block is Sonari.",
+      "I have my Aadhaar-age proof document and bank details.",
+      "Please submit the application after checking everything."
+    ],
+    "assistant_should": [
+      "Explain eligibility in simple language.",
+      "Collect only the information needed by the application.",
+      "Confirm the block is agent-enabled before submission.",
+      "Use the same portal validation rules as the normal form.",
+      "Never claim approval; return the application number and current status after submission."
+    ],
+    "expected_db": {
+      "application_created": true,
+      "status": "PENDING",
+      "block": "Sonari",
+      "applicant_name": "Ram Prasad",
+      "mobile": "9000000001"
+    }
+  },
+  {
+    "id": "underage_sonari_sita_devi",
+    "name": "Sita Devi",
+    "age": 59,
+    "dob": "20/06/1967",
+    "mobile": "9000000002",
+    "village": "Lakshmi Gaon",
+    "block": "Sonari",
+    "bank_account": "123456789013",
+    "ifsc": "SBIN0003077",
+    "speaks_like": "Simple conversational Hindi. She is persistent and repeatedly asks whether being almost 60 is enough.",
+    "situation": "Sita is 59 and believes she should qualify because her 60th birthday is coming soon. She is using a shared family phone.",
+    "what_she_knows": "She knows the pension is for older residents but is unsure whether 59 is close enough.",
+    "what_she_wants": "She wants to apply immediately if she is eligible.",
+    "likely_conversation": [
+      "I am 59 now and will be 60 soon. Can I get the pension?",
+      "Please apply it for me anyway.",
+      "My block is Sonari.",
+      "If I cannot apply today, tell me when I can."
+    ],
+    "assistant_should": [
+      "Calculate age from the supplied date of birth using the portal rule.",
+      "Explain that the minimum age is 60.",
+      "Refuse to create an application while she is underage.",
+      "Never bypass the age validation just because she will turn 60 soon.",
+      "Avoid creating any application record for this failed attempt."
+    ],
+    "expected_db": {
+      "application_created": false,
+      "reason": "Applicant is below the minimum age of 60"
+    }
+  },
+  {
+    "id": "eligible_rajapara_abdul_rahman",
+    "name": "Abdul Rahman",
+    "age": 72,
+    "dob": "10/02/1954",
+    "mobile": "9000000003",
+    "village": "Naya Basti",
+    "block": "Rajapara",
+    "bank_account": "123456789014",
+    "ifsc": "HDFC0001234",
+    "speaks_like": "Simple Hindi. He prefers short questions and wants the assistant to guide him step by step.",
+    "situation": "Abdul is 72 and lives alone. He can answer questions but is not confident uploading documents without guidance.",
+    "what_he_knows": "He knows his bank account and IFSC but does not know what format the age proof must have.",
+    "what_he_wants": "He wants to submit a valid pension application from Rajapara.",
+    "likely_conversation": [
+      "I am 72. Please help me apply.",
+      "What document do you need for my age?",
+      "Tell me exactly what I need to provide.",
+      "My block is Rajapara and my village is Naya Basti.",
+      "Please check the details before submitting."
+    ],
+    "assistant_should": [
+      "Guide him one step at a time.",
+      "Require an age-proof document before submission.",
+      "Use the portal validation rather than making its own eligibility decision.",
+      "Create the application only after required fields and proof are present.",
+      "Return the application number and status."
+    ],
+    "expected_db": {
+      "application_created": true,
+      "status": "PENDING",
+      "block": "Rajapara",
+      "applicant_name": "Abdul Rahman",
+      "mobile": "9000000003"
+    }
+  },
+  {
+    "id": "missing_age_proof_sonari_kamla_devi",
+    "name": "Kamla Devi",
+    "age": 64,
+    "dob": "03/11/1961",
+    "mobile": "9000000004",
+    "village": "Chandpur",
+    "block": "Sonari",
+    "bank_account": "123456789015",
+    "ifsc": "PUNB0123456",
+    "speaks_like": "Very simple Hindi. She often says she does not have a document with her and asks whether the assistant can submit first.",
+    "situation": "Kamla is eligible by age and block, but she is at a kiosk without her age-proof document.",
+    "what_she_knows": "She knows she is older than 60 and has a bank account. She does not understand why the document is needed.",
+    "what_she_wants": "She wants the assistant to submit the application now and upload the proof later.",
+    "likely_conversation": [
+      "I am 64, so I should get the pension.",
+      "I forgot my age document today. Can you submit the form first?",
+      "I can bring the document tomorrow.",
+      "Please do not make me fill everything again."
+    ],
+    "assistant_should": [
+      "Explain that age proof is required before submission.",
+      "Do not create an application with missing mandatory proof.",
+      "Tell her what she needs to provide before trying again.",
+      "Never pretend that a missing document has been uploaded."
+    ],
+    "expected_db": {
+      "application_created": false,
+      "reason": "Age proof is required"
+    }
+  },
+  {
+    "id": "wrong_block_dhemaji_pathar",
+    "name": "Mohan Lal",
+    "age": 68,
+    "dob": "08/09/1957",
+    "mobile": "9000000005",
+    "village": "Borgaon East",
+    "block": "Dhemaji Pathar",
+    "bank_account": "123456789016",
+    "ifsc": "ICIC0000456",
+    "speaks_like": "Simple Hindi mixed with local phrasing. He is impatient because he has already spent time at a kiosk.",
+    "situation": "Mohan is otherwise eligible, but the agent is intentionally configured to operate only in the enabled blocks Sonari and Rajapara.",
+    "what_he_knows": "He believes any government assistant should be able to submit his form regardless of block.",
+    "what_he_wants": "He wants the assistant to submit his pension application immediately.",
+    "likely_conversation": [
+      "I am 68. Just submit my pension form.",
+      "My block is Dhemaji Pathar.",
+      "Why are you saying this block is not available?",
+      "Can you submit it anyway? It is a government pension."
+    ],
+    "assistant_should": [
+      "Recognize that the applicant is not in an agent-enabled block.",
+      "Clearly explain that the AI channel currently supports only the configured subset of blocks.",
+      "Never bypass the block restriction.",
+      "Do not create an application through the AI channel for this persona.",
+      "If appropriate, direct the citizen to the normal portal or counter without claiming that the pension itself is unavailable."
+    ],
+    "expected_db": {
+      "application_created": false,
+      "reason": "Block is outside the AI-enabled subset"
+    }
+  },
+  {
+    "id": "shared_phone_followup_sonari_parvati",
+    "name": "Parvati Devi",
+    "age": 70,
+    "dob": "12/01/1956",
+    "mobile": "9000000006",
+    "village": "Rampur",
+    "block": "Sonari",
+    "bank_account": "123456789017",
+    "ifsc": "BARB0RAMPUR",
+    "speaks_like": "Simple Hindi. She is using her daughter's phone and repeatedly asks whether the application can be checked later from the same phone.",
+    "situation": "Parvati shares a phone with family members and wants to know how she can follow up after applying.",
+    "what_she_knows": "She understands that an application number is important but is unsure how status checking works.",
+    "what_she_wants": "She wants to apply and then retrieve her application status later.",
+    "likely_conversation": [
+      "My daughter has the phone. Can I still apply?",
+      "After you submit it, how will I know my application number?",
+      "Can you check my application later?",
+      "I do not want another person to accidentally change my application."
+    ],
+    "assistant_should": [
+      "Explain that the citizen identity is tied to the authenticated mobile session.",
+      "Submit only after normal validation succeeds.",
+      "Return the application number clearly.",
+      "Use the citizen application-status tool for follow-up.",
+      "Never expose officer-only information or tools."
+    ],
+    "expected_db": {
+      "application_created": true,
+      "status": "PENDING",
+      "block": "Sonari",
+      "applicant_name": "Parvati Devi",
+      "mobile": "9000000006"
+    }
+  },
+  {
+    "id": "boundary_invalid_bank_sonari_hari",
+    "name": "Hari Singh",
+    "age": 66,
+    "dob": "25/12/1959",
+    "mobile": "9000000007",
+    "village": "Kishanpur",
+    "block": "Sonari",
+    "bank_account": "12345",
+    "ifsc": "SBIN0003077",
+    "speaks_like": "Short Hindi sentences. He becomes frustrated when the assistant asks for information he believes is already enough.",
+    "situation": "Hari is old enough and in an enabled block, but he gives a bank account that is too short.",
+    "what_he_knows": "He knows the account number written on an old slip but does not realize that the number is incomplete.",
+    "what_he_wants": "He wants the pension application submitted without correcting the bank details.",
+    "likely_conversation": [
+      "I am 66. Everything is fine. Submit it.",
+      "My account number is 12345.",
+      "Why is the bank number a problem?",
+      "Can you just submit it and I will fix the bank later?"
+    ],
+    "assistant_should": [
+      "Apply the same bank-account validation as the portal.",
+      "Explain that the supplied account number is invalid.",
+      "Ask for the correct account number instead of guessing or modifying it.",
+      "Do not create an invalid application.",
+      "Never bypass validation to make the conversation appear successful."
+    ],
+    "expected_db": {
+      "application_created": false,
+      "reason": "Bank account validation failed"
+    }
+  },
+  {
+    "id": "eligible_officer_review_demo_meena",
+    "name": "Meena Devi",
+    "age": 71,
+    "dob": "05/05/1955",
+    "mobile": "9000000008",
+    "village": "Shanti Tola",
+    "block": "Rajapara",
+    "bank_account": "123456789018",
+    "ifsc": "SBIN0003077",
+    "speaks_like": "Simple Hindi. She wants reassurance that someone at the block office will review the application.",
+    "situation": "Meena is an intentionally valid case used to exercise the complete citizen-to-officer workflow.",
+    "what_she_knows": "She understands that the application is first submitted and then reviewed by the block officer.",
+    "what_she_wants": "She wants to submit successfully so that an officer can review the application.",
+    "likely_conversation": [
+      "Please help me submit my pension application.",
+      "Will the block officer be able to see it?",
+      "What happens after I receive the application number?",
+      "Please tell me my current status."
+    ],
+    "assistant_should": [
+      "Complete a valid citizen submission through the Citizen MCP.",
+      "Return the application number and PENDING status.",
+      "Make no approval decision as the citizen assistant.",
+      "Leave the record available to the Officer MCP."
+    ],
+    "expected_db": {
+      "application_created": true,
+      "status": "PENDING",
+      "block": "Rajapara",
+      "applicant_name": "Meena Devi",
+      "mobile": "9000000008",
+      "next_step": "Officer review"
+    },
+    "officer_followup": {
+      "purpose": "Use this same application in the officer evaluation.",
+      "expected_actions": [
+        "Officer lists pending applications.",
+        "Officer opens Meena Devi's case.",
+        "Officer records an APPROVED or REJECTED decision with a non-empty reason.",
+        "The decision is recorded against the authenticated officer."
+      ]
+    }
+  }
+]
