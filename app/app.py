@@ -746,7 +746,7 @@ from agent_api import agent_api
 app.register_blueprint(agent_api, url_prefix="/api/agent")
 
 from eval_dashboard import dashboard as eval_dashboard
-app.register_blueprint(eval_dashboard, url_prefix="/dashboard")
+app.register_blueprint(eval_dashboard)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=False)
