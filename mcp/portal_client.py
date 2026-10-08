@@ -9,15 +9,13 @@ import requests
 
 from .common import PORTAL_BASE_URL, AGENT_INTERNAL_SECRET
 
+
 class PortalError(RuntimeError):
     pass
 
+
 def _principal_headers(subject: str, role: str) -> dict[str, str]:
-    payload = {
-        "sub": subject,
-        "role": role,
-        "iat": int(time.time()),
-    }
+    payload = {"sub": subject, "role": role, "iat": int(time.time())}
     raw = json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()
     encoded = base64.urlsafe_b64encode(raw).decode().rstrip("=")
     sig = hmac.new(
@@ -28,6 +26,7 @@ def _principal_headers(subject: str, role: str) -> dict[str, str]:
         "X-SewaSetu-Agent-Signature": sig,
     }
 
+
 class PortalClient:
     def __init__(self, subject: str, role: str):
         self.subject = subject
@@ -35,8 +34,9 @@ class PortalClient:
         self.headers = _principal_headers(subject, role)
 
     def call(self, path: str, method: str = "GET", **kwargs) -> dict[str, Any]:
-        url = PORTAL_BASE_URL + path
-        r = requests.request(method, url, headers=self.headers, timeout=20, **kwargs)
+        r = requests.request(
+            method, PORTAL_BASE_URL + path, headers=self.headers, timeout=20, **kwargs
+        )
         try:
             body = r.json()
         except Exception:
@@ -50,6 +50,13 @@ class PortalClient:
 
     def eligibility(self, data):
         return self.call("/api/agent/citizen/eligibility", "POST", json=data)
+
+    def upload(self, filename: str, content_base64: str):
+        return self.call(
+            "/api/agent/citizen/upload",
+            "POST",
+            json={"filename": filename, "content_base64": content_base64},
+        )
 
     def submit(self, data):
         return self.call("/api/agent/citizen/applications", "POST", json=data)
