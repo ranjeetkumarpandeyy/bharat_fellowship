@@ -1,0 +1,1268 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+/* ============================================================
+   SEWA SETU — APPLICATION STATUS
+   Senior citizen friendly status page
+   ============================================================ */
+
+.status-page {
+    width: 100vw;
+    min-height: 100vh;
+
+    margin-left: calc(50% - 50vw);
+
+    display: grid;
+
+    grid-template-columns: 42% 58%;
+
+    background: #f3f6fa;
+
+    color: #111827;
+
+    font-family:
+        "Mukta",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* ============================================================
+   LEFT PANEL
+   ============================================================ */
+
+.status-intro {
+    min-height: 100vh;
+
+    padding: 68px 60px 32px;
+
+    background: #0788c7;
+
+    color: #fff;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.status-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 34px;
+
+    font-weight: 800;
+}
+
+
+.status-logo-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+}
+
+
+.status-intro-content {
+    margin-top: auto;
+
+    margin-bottom: auto;
+
+    max-width: 550px;
+}
+
+
+.status-intro h1 {
+    margin: 0;
+
+    font-size: 48px;
+
+    line-height: 1.12;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+
+.status-intro-hi {
+    margin: 8px 0 0;
+
+    font-size: 27px;
+
+    font-weight: 700;
+}
+
+
+.status-intro-description {
+    margin: 25px 0 0;
+
+    max-width: 520px;
+
+    color: rgba(255,255,255,.96);
+
+    font-size: 19px;
+
+    line-height: 1.65;
+}
+
+
+.status-intro-footer {
+    margin-top: auto;
+
+    color: rgba(255,255,255,.82);
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   RIGHT SIDE
+   ============================================================ */
+
+.status-main {
+    min-height: 100vh;
+
+    padding: 30px 36px;
+
+    background: #f3f6fa;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* ============================================================
+   HOME
+   ============================================================ */
+
+.status-home {
+    width: 100%;
+
+    max-width: 680px;
+}
+
+
+.status-home a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 46px;
+
+    padding: 0 18px;
+
+    border: 1px solid #cbd6e2;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #152238;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+.status-home a:hover {
+    border-color: #0788c7;
+
+    color: #0788c7;
+}
+
+
+/* ============================================================
+   MAIN CARD
+   ============================================================ */
+
+.status-card {
+    width: 100%;
+
+    max-width: 680px;
+
+    margin-top: 22px;
+
+    padding: 32px 38px 35px;
+
+    background: #fff;
+
+    border: 1px solid #d2dce6;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 3px 12px rgba(21,34,56,.08);
+}
+
+
+/* ============================================================
+   PAGE TITLE
+   ============================================================ */
+
+.status-card h2 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 30px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.status-subtitle {
+    margin: 5px 0 0;
+
+    color: #596575;
+
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   APPLICATION NUMBER
+   ============================================================ */
+
+.application-number {
+    margin-top: 24px;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    border: 1px solid #cfe2ee;
+
+    background: #f1f8fc;
+
+    text-align: center;
+}
+
+
+.application-number-label {
+    color: #596575;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.application-number-value {
+    margin-top: 3px;
+
+    color: #075f8d;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: .5px;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.current-status {
+    margin-top: 22px;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    background: #f7f9fb;
+
+    border: 1px solid #d7dfe8;
+}
+
+
+.current-status-label {
+    color: #596575;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-top: 7px;
+
+    padding: 8px 15px;
+
+    border-radius: 20px;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+.status-pending {
+    background: #fff4d6;
+
+    color: #795400;
+}
+
+
+.status-approved {
+    background: #e5f6eb;
+
+    color: #176b38;
+}
+
+
+.status-rejected,
+.status-withdrawn {
+    background: #fdeaea;
+
+    color: #9b2118;
+}
+
+
+.status-message {
+    margin: 9px 0 0;
+
+    color: #596575;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   INFORMATION SECTION
+   ============================================================ */
+
+.info-title {
+    margin: 28px 0 8px;
+
+    color: #111827;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+.info-list {
+    margin: 0;
+
+    border: 1px solid #d8e0e8;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.info-row {
+    display: grid;
+
+    grid-template-columns: 42% 58%;
+
+    min-height: 49px;
+
+    border-bottom: 1px solid #e0e5ea;
+}
+
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+
+.info-label {
+    padding: 12px 14px;
+
+    background: #f5f7f9;
+
+    color: #596575;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.info-value {
+    padding: 12px 14px;
+
+    color: #111827;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* ============================================================
+   DATES
+   ============================================================ */
+
+.date-section {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 12px;
+}
+
+
+.date-box {
+    padding: 13px;
+
+    border: 1px solid #d8e0e8;
+
+    border-radius: 9px;
+
+    background: #fff;
+}
+
+
+.date-label {
+    color: #687789;
+
+    font-size: 13px;
+}
+
+
+.date-value {
+    margin-top: 3px;
+
+    color: #111827;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   PRIMARY DOWNLOAD
+   ============================================================ */
+
+.download-button {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    min-height: 58px;
+
+    margin-top: 25px;
+
+    border-radius: 9px;
+
+    background: #0788c7;
+
+    color: #fff !important;
+
+    text-decoration: none !important;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.download-button:hover {
+    background: #0678b0;
+}
+
+
+/* ============================================================
+   CONNECTED APPLICATIONS
+   ============================================================ */
+
+.connected-link {
+    display: block;
+
+    margin-top: 13px;
+
+    text-align: center;
+
+    color: #075f8d;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   PENDING INFORMATION
+   ============================================================ */
+
+.pending-box {
+    margin-top: 24px;
+
+    padding: 16px;
+
+    border-radius: 10px;
+
+    border: 1px solid #ead9a8;
+
+    background: #fffaf0;
+
+    color: #5f4b17;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+
+.pending-box strong {
+    color: #48380e;
+}
+
+
+/* ============================================================
+   WITHDRAW
+   ============================================================ */
+
+.withdraw-section {
+    margin-top: 28px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #e0e5ea;
+}
+
+
+.withdraw-section h3 {
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 800;
+}
+
+
+.withdraw-note {
+    margin: 7px 0 15px;
+
+    color: #596575;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+
+.withdraw-button {
+    min-height: 52px;
+
+    padding: 0 18px;
+
+    border: 1px solid #b42318;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #a51d14;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+.withdraw-button:hover {
+    background: #fff4f2;
+}
+
+
+/* ============================================================
+   REJECTED / WITHDRAWN
+   ============================================================ */
+
+.new-application {
+    margin-top: 22px;
+
+    padding: 17px;
+
+    border-radius: 10px;
+
+    background: #f4f8fb;
+
+    border: 1px solid #d4e0e8;
+
+    color: #596575;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+
+.new-application a {
+    display: inline-block;
+
+    margin-top: 7px;
+
+    color: #075f8d;
+
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.status-footer {
+    width: 100%;
+
+    max-width: 680px;
+
+    padding: 17px 0 10px;
+
+    text-align: center;
+
+    color: #7b8794;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 950px) {
+
+    .status-page {
+        grid-template-columns: 1fr;
+    }
+
+    .status-intro {
+        min-height: auto;
+
+        padding: 32px 28px 38px;
+    }
+
+    .status-intro-content {
+        margin-top: 65px;
+
+        margin-bottom: 45px;
+    }
+
+    .status-intro h1 {
+        font-size: 38px;
+    }
+
+    .status-intro-hi {
+        font-size: 23px;
+    }
+
+    .status-intro-description {
+        font-size: 17px;
+    }
+
+    .status-intro-footer {
+        margin-top: 0;
+    }
+
+    .status-main {
+        min-height: auto;
+
+        padding: 22px 14px 35px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .status-intro {
+        padding: 25px 20px 30px;
+    }
+
+    .status-logo {
+        font-size: 28px;
+    }
+
+    .status-intro h1 {
+        font-size: 33px;
+    }
+
+    .status-card {
+        padding: 24px 18px 28px;
+
+        border-radius: 12px;
+    }
+
+    .status-card h2 {
+        font-size: 26px;
+    }
+
+    .info-row {
+        grid-template-columns: 1fr;
+    }
+
+    .info-label {
+        padding-bottom: 4px;
+
+        border-bottom: none;
+    }
+
+    .info-value {
+        padding-top: 4px;
+    }
+
+    .date-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+
+<div class="status-page">
+
+
+    <!-- ========================================================
+         LEFT SIDE
+         ======================================================== -->
+
+    <section class="status-intro">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="/"
+            class="status-logo"
+            aria-label="Sewa Setu home">
+
+            <svg
+                class="status-logo-icon"
+                viewBox="0 0 48 48"
+                fill="none"
+                aria-hidden="true">
+
+                <path
+                    d="M4 31 Q24 7 44 31"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+
+                <path
+                    d="M4 37H44"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+
+                <path
+                    d="M12 37V25 M24 37V14 M36 37V25"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <span>
+                Sewa Setu
+            </span>
+
+        </a>
+
+
+
+        <!-- LEFT MESSAGE -->
+
+        <div class="status-intro-content">
+
+            <h1>
+                Check your pension application
+            </h1>
+
+            <p class="status-intro-hi">
+                अपने पेंशन आवेदन की स्थिति देखें
+            </p>
+
+            <p class="status-intro-description">
+
+                You can see your application details,
+                current status and important dates here.
+
+                Keep your application number safe
+                for future reference.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="status-intro-footer">
+
+            © 2026 Sewa Setu. All rights reserved.
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         RIGHT SIDE
+         ======================================================== -->
+
+    <main class="status-main">
+
+
+        <!-- HOME -->
+
+        <div class="status-home">
+
+            <a href="/">
+
+                <span aria-hidden="true">
+                    ‹
+                </span>
+
+                Home
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ====================================================
+             STATUS CARD
+             ==================================================== -->
+
+        <section class="status-card">
+
+
+            <h2>
+                Application Status
+            </h2>
+
+            <p class="status-subtitle">
+                आवेदन की स्थिति
+            </p>
+
+
+
+            <!-- ==================================================
+                 APPLICATION NUMBER
+                 ================================================== -->
+
+            <div class="application-number">
+
+                <div class="application-number-label">
+
+                    Application Number
+                    / आवेदन संख्या
+
+                </div>
+
+                <div class="application-number-value">
+
+                    {{ a[0] }}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 CURRENT STATUS
+                 ================================================== -->
+
+            <div class="current-status">
+
+                <div class="current-status-label">
+
+                    Current Status
+                    / वर्तमान स्थिति
+
+                </div>
+
+
+                {% if a[8] == 'PENDING' %}
+
+                    <div class="status-badge status-pending">
+                        PENDING
+                    </div>
+
+                    <p class="status-message">
+
+                        Your application is under review.
+                        / आपका आवेदन जाँच के अधीन है।
+
+                    </p>
+
+
+                {% elif a[8] == 'APPROVED' %}
+
+                    <div class="status-badge status-approved">
+                        APPROVED
+                    </div>
+
+                    <p class="status-message">
+
+                        Your pension application has been approved.
+                        / आपका पेंशन आवेदन स्वीकृत हो गया है।
+
+                    </p>
+
+
+                {% elif a[8] == 'REJECTED' %}
+
+                    <div class="status-badge status-rejected">
+                        REJECTED
+                    </div>
+
+                    <p class="status-message">
+
+                        This application has been rejected.
+                        / यह आवेदन अस्वीकृत कर दिया गया है।
+
+                    </p>
+
+
+                {% elif a[8] == 'WITHDRAWN' %}
+
+                    <div class="status-badge status-withdrawn">
+                        WITHDRAWN
+                    </div>
+
+                    <p class="status-message">
+
+                        This application has been withdrawn.
+                        / यह आवेदन वापस ले लिया गया है।
+
+                    </p>
+
+
+                {% else %}
+
+                    <div class="status-badge">
+                        {{ a[8] }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 APPLICATION INFORMATION
+                 ================================================== -->
+
+            <div class="info-title">
+
+                Applicant Details
+                / आवेदक की जानकारी
+
+            </div>
+
+
+            <div class="info-list">
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Applicant Name
+                    </div>
+
+                    <div class="info-value">
+                        {{ a[1] }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Mobile
+                    </div>
+
+                    <div class="info-value">
+                        {{ a[2] }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Date of Birth
+                    </div>
+
+                    <div class="info-value">
+                        {{ a[3] }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Village
+                    </div>
+
+                    <div class="info-value">
+                        {{ a[4] }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Block
+                    </div>
+
+                    <div class="info-value">
+                        {{ a[5] }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Bank Account
+                    </div>
+
+                    <div class="info-value">
+                        {{ a[6] }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        IFSC
+                    </div>
+
+                    <div class="info-value">
+                        {{ a[7] or '-' }}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 DATES
+                 ================================================== -->
+
+            <div class="date-section">
+
+
+                <div class="date-box">
+
+                    <div class="date-label">
+                        Submitted
+                    </div>
+
+                    <div class="date-value">
+                        {{ a[9] }}
+                    </div>
+
+                </div>
+
+
+                <div class="date-box">
+
+                    <div class="date-label">
+                        Decision Date
+                    </div>
+
+                    <div class="date-value">
+                        {{ a[10] or '-' }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 ACKNOWLEDGMENT
+                 ================================================== -->
+
+            <a
+                class="download-button"
+                href="/ack/{{ app_id }}.pdf">
+
+                Download Acknowledgment (PDF)
+
+            </a>
+
+
+            <a
+                class="connected-link"
+                href="/status/connections">
+
+                View connected applications
+
+            </a>
+
+
+
+            <!-- ==================================================
+                 PENDING
+                 ================================================== -->
+
+            {% if a[8] == 'PENDING' %}
+
+                <div class="pending-box">
+
+                    <strong>
+                        Your application is being reviewed.
+                    </strong>
+
+                    <br>
+
+                    Please keep your application number safe.
+                    You can return to this page to check the status.
+
+                    <br><br>
+
+                    आपका आवेदन जाँच के अधीन है।
+                    आवेदन संख्या सुरक्षित रखें।
+
+                </div>
+
+
+                <div class="withdraw-section">
+
+                    <h3>
+                        Made a mistake?
+                    </h3>
+
+                    <p class="withdraw-note">
+
+                        A pending application can be withdrawn.
+                        After withdrawing, you may submit a fresh
+                        application with the same mobile number.
+
+                    </p>
+
+
+                    <form
+                        method="post"
+                        action="/application/{{ app_id }}/withdraw"
+                        onsubmit="return confirm('Withdraw application {{ a[0] }}? This cannot be undone.');">
+
+                        <button
+                            class="withdraw-button"
+                            type="submit">
+
+                            Withdraw this application
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+            {% elif a[8] in ('WITHDRAWN', 'REJECTED') %}
+
+
+                <div class="new-application">
+
+                    This application is
+                    <strong>{{ a[8].lower() }}</strong>.
+
+                    <br>
+
+                    You may submit a new application if eligible.
+
+                    <br>
+
+                    <a href="/apply">
+                        Apply for Pension Again →
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="status-footer">
+
+            Department of Social Welfare · Government of Purvanchal
+
+        </div>
+
+
+    </main>
+
+</div>
+
+{% endblock %}

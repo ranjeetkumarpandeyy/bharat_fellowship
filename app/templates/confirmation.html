@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+
+  <title>Application Submitted - Sewa Setu</title>
+
+
+  <style>
+
+    :root {
+      --blue: #087fbd;
+      --blue-dark: #075f8f;
+      --navy: #123b63;
+      --ink: #17212b;
+      --muted: #5d6b78;
+
+      --page: #f3f6f9;
+      --card: #ffffff;
+      --line: #d6dee6;
+
+      --green: #167344;
+      --green-soft: #e8f6ee;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      background: var(--page);
+
+      color: var(--ink);
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+
+    .topbar {
+      background: var(--navy);
+
+      border-bottom: 4px solid #f59e0b;
+
+      color: #ffffff;
+
+      padding: 17px 30px;
+    }
+
+
+    .topbar-inner {
+      max-width: 1100px;
+
+      margin: 0 auto;
+    }
+
+
+    .government {
+      font-size: 13px;
+
+      opacity: .9;
+    }
+
+
+    .site-name {
+      margin-top: 2px;
+
+      font-size: 23px;
+
+      font-weight: 800;
+    }
+
+
+    .department {
+      font-size: 13px;
+
+      opacity: .88;
+    }
+
+
+    .page {
+      min-height: calc(100vh - 94px);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 40px 20px;
+    }
+
+
+    .card {
+      width: 100%;
+
+      max-width: 720px;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+
+      border-radius: 10px;
+
+      box-shadow:
+        0 5px 20px rgba(25,50,70,.08);
+
+      overflow: hidden;
+    }
+
+
+    .success-header {
+      padding: 30px 35px;
+
+      background: var(--green-soft);
+
+      border-bottom: 1px solid #b9dfc7;
+
+      text-align: center;
+    }
+
+
+    .success-icon {
+      width: 64px;
+
+      height: 64px;
+
+      margin: 0 auto 15px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      color: #ffffff;
+
+      font-size: 35px;
+
+      font-weight: 800;
+    }
+
+
+    .success-header h1 {
+      margin: 0;
+
+      color: #105b35;
+
+      font-size: 29px;
+
+      line-height: 1.2;
+
+      font-weight: 800;
+    }
+
+
+    .success-header p {
+      margin: 8px 0 0;
+
+      color: #315f45;
+
+      font-size: 15px;
+    }
+
+
+    .content {
+      padding: 30px 35px;
+    }
+
+
+    .application-label {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .05em;
+
+      text-align: center;
+    }
+
+
+    .application-number {
+      margin: 7px 0 25px;
+
+      padding: 16px;
+
+      border: 2px dashed #9db2c2;
+
+      border-radius: 8px;
+
+      background: #f7fafc;
+
+      color: var(--navy);
+
+      text-align: center;
+
+      font-size: 27px;
+
+      font-weight: 800;
+
+      letter-spacing: .04em;
+    }
+
+
+    .important {
+      margin-bottom: 22px;
+
+      padding: 17px 18px;
+
+      background: #fff8e7;
+
+      border: 1px solid #efd48c;
+
+      border-left: 4px solid #d99700;
+
+      border-radius: 7px;
+    }
+
+
+    .important strong {
+      color: #714d00;
+    }
+
+
+    .important p {
+      margin: 5px 0 0;
+
+      color: #5e5134;
+
+      font-size: 14px;
+    }
+
+
+    .next-title {
+      margin: 0 0 12px;
+
+      color: var(--navy);
+
+      font-size: 19px;
+
+      font-weight: 800;
+    }
+
+
+    .steps {
+      margin: 0;
+
+      padding: 0;
+
+      list-style: none;
+
+      counter-reset: confirmation-step;
+    }
+
+
+    .steps li {
+      counter-increment: confirmation-step;
+
+      position: relative;
+
+      margin-bottom: 12px;
+
+      padding: 11px 14px 11px 48px;
+
+      border: 1px solid #e1e7ec;
+
+      border-radius: 7px;
+
+      background: #ffffff;
+
+      color: var(--ink);
+
+      font-size: 14px;
+    }
+
+
+    .steps li::before {
+      content: counter(confirmation-step);
+
+      position: absolute;
+
+      left: 12px;
+
+      top: 9px;
+
+      width: 25px;
+
+      height: 25px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: var(--blue);
+
+      color: #ffffff;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+
+    .actions {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+
+      margin-top: 25px;
+    }
+
+
+    .button {
+      min-height: 50px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 10px 15px;
+
+      border-radius: 7px;
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      text-align: center;
+    }
+
+
+    .button.primary {
+      background: var(--blue);
+
+      color: #ffffff;
+    }
+
+
+    .button.primary:hover {
+      background: var(--blue-dark);
+    }
+
+
+    .button.secondary {
+      background: #ffffff;
+
+      color: var(--navy);
+
+      border: 1px solid #aebdca;
+    }
+
+
+    .button.secondary:hover {
+      background: #f5f8fa;
+    }
+
+
+    .footer-note {
+      margin-top: 23px;
+
+      padding-top: 17px;
+
+      border-top: 1px solid var(--line);
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      text-align: center;
+
+      line-height: 1.6;
+    }
+
+
+    @media (max-width: 600px) {
+
+      .topbar {
+        padding: 14px 17px;
+      }
+
+
+      .page {
+        padding: 20px 12px;
+      }
+
+
+      .success-header,
+      .content {
+        padding: 25px 20px;
+      }
+
+
+      .success-header h1 {
+        font-size: 25px;
+      }
+
+
+      .application-number {
+        font-size: 21px;
+      }
+
+
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+    <div class="government">
+      GOVERNMENT OF PURVANCHAL
+    </div>
+
+    <div class="site-name">
+      Sewa Setu
+    </div>
+
+    <div class="department">
+      Department of Social Welfare · Old Age Pension Scheme
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<main class="page">
+
+
+  <section class="card">
+
+
+    <div class="success-header">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+
+      <h1>
+        Your application has been submitted
+      </h1>
+
+
+      <p>
+        आपका आवेदन सफलतापूर्वक जमा हो गया है।
+      </p>
+
+    </div>
+
+
+
+    <div class="content">
+
+
+      <div class="application-label">
+        Your Application Number
+      </div>
+
+
+      <div class="application-number">
+        {{ app_no }}
+      </div>
+
+
+
+      <div class="important">
+
+        <strong>
+          Important: Please save this application number.
+        </strong>
+
+        <p>
+          You can use it to identify your application when
+          checking its status. Keep this number safely.
+        </p>
+
+      </div>
+
+
+
+      <h2 class="next-title">
+        What happens next?
+      </h2>
+
+
+      <ol class="steps">
+
+        <li>
+          Your application will be checked by the concerned
+          Block Officer.
+        </li>
+
+        <li>
+          You can check your application status using your
+          mobile number and date of birth.
+        </li>
+
+        <li>
+          The application should normally receive a decision
+          within 15 days.
+        </li>
+
+        <li>
+          If no decision is made within the prescribed period,
+          the application may be deemed approved according
+          to the applicable rule.
+        </li>
+
+      </ol>
+
+
+
+      <div class="actions">
+
+
+        <a
+          class="button primary"
+          href="/application/{{ app_id }}">
+
+          View Application Status
+
+        </a>
+
+
+        <a
+          class="button secondary"
+          href="/ack/{{ app_id }}.pdf"
+          target="_blank">
+
+          Download Acknowledgment
+
+        </a>
+
+
+      </div>
+
+
+
+      <div class="footer-note">
+
+        An SMS confirmation has been sent to your registered
+        mobile number.
+
+        <br>
+
+        Department of Social Welfare · Sewa Setu
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+</body>
+
+</html>

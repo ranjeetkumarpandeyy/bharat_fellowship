@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Step 1: Mobile Verification - Sewa Setu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --blue: #0284c7; --blue-deep: #026aa2; --ink: #111827; --muted: #4b5563;
+      --page: #f3f6fa; --line: #d5dbe5; --field: #6b7586; --green: #15803d;
+      --red: #b42318; --red-wash: #fdecea;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; font: 400 20px/1.55 "Mukta", system-ui, sans-serif; color: var(--ink); }
+
+    /* left panel */
+    .intro { flex: 1 1 42%; background: var(--blue); color: #fff; padding: 56px 56px 40px; display: flex; flex-direction: column; }
+    .logo { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-size: 2rem; font-weight: 700; }
+    .logo svg { width: 46px; height: 46px; }
+    .intro h1 { margin: auto 0 0; padding-top: 48px; font-size: 2.6rem; line-height: 1.15; font-weight: 700; }
+    .intro .hi { margin: 8px 0 0; font-size: 1.4rem; font-weight: 600; }
+    .intro .lead { margin: 20px 0 auto; max-width: 28em; font-size: 1.1rem; }
+    .copy { margin-top: 36px; font-size: .9rem; opacity: .75; }
+
+    /* right card */
+    .side { flex: 1 1 58%; background: var(--page); padding: 28px; display: flex; align-items: center; justify-content: center; }
+    .card { width: 100%; max-width: 580px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 36px 30px; box-shadow: 0 2px 10px rgba(17,24,39,.07); }
+
+    .back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 18px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); text-decoration: none; font-size: .95rem; font-weight: 600; background: #fff; }
+    .back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .back:hover { background: #f3f6fa; }
+
+    /* progress: 6 real steps */
+    .steps { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 6px; }
+    .steps li { flex: 1; border-top: 5px solid var(--line); padding-top: 6px; font-size: .82rem; line-height: 1.2; color: var(--muted); }
+    .steps li.current { border-top-color: var(--blue); color: var(--ink); font-weight: 600; }
+
+    h2 { margin: 0; font-size: 1.8rem; line-height: 1.2; font-weight: 700; }
+    .sub { margin: 2px 0 6px; color: var(--muted); }
+
+    .msg { display: flex; gap: 10px; margin: 14px 0 4px; padding: 12px 14px; border-radius: 10px; background: var(--red-wash); border: 1px solid #efb1aa; color: #6b1a12; }
+    .msg svg { flex: none; width: 24px; height: 24px; margin-top: 3px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .msg p { margin: 0; }
+    .msg small { display: block; font-size: .95rem; }
+    .msg[hidden] { display: none; }
+
+    label { display: block; margin: 22px 0 4px; font-weight: 700; }
+    label small { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; }
+    input[type=text], input[type=tel] {
+      display: block; width: 100%; min-height: 58px; padding: 8px 14px;
+      font: inherit; font-size: 1.3rem; color: var(--ink);
+      background: #fff; border: 2px solid var(--field); border-radius: 10px;
+    }
+    input.num { letter-spacing: .08em; }
+    input.short { max-width: 160px; text-align: center; }
+    input:focus { border-color: var(--blue); }
+    input.bad { border-color: var(--red); background: #fff8f7; }
+    :focus-visible { outline: 4px solid #f59e0b; outline-offset: 2px; }
+
+    .captcha { margin-top: 22px; padding: 14px 16px; border-radius: 10px; background: #f3f6fa; border: 1px solid var(--line); }
+    .captcha label { margin-top: 0; }
+
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 64px; margin-top: 26px; padding: 10px 18px; border: 0; border-radius: 10px; background: var(--blue); color: #fff; font: 700 1.25rem/1.2 inherit; font-family: inherit; cursor: pointer; }
+    .btn:hover { background: var(--blue-deep); }
+    .btn small { display: block; font-size: .95rem; font-weight: 400; }
+
+    .note { margin: 16px 0 0; text-align: center; color: var(--muted); font-size: .98rem; }
+
+    @media (max-width: 860px) {
+      body { flex-direction: column; font-size: 19px; }
+      .intro { padding: 24px 22px 26px; }
+      .intro h1 { margin: 0; padding-top: 22px; font-size: 1.9rem; }
+      .intro .hi { font-size: 1.15rem; }
+      .intro .lead, .copy { display: none; }
+      .side { padding: 14px 12px 28px; align-items: flex-start; }
+      .card { padding: 22px 16px 24px; }
+      .steps li:not(.current) .label { display: none; }
+      .steps li.current { flex: 4; }
+      input.short { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="intro">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 32 Q24 4 45 32"/><path d="M3 38h42"/><path d="M12 38V24M24 38V15M36 38V24" stroke-width="2.5"/>
+    </svg>
+    Sewa Setu
+  </a>
+  <h1>Apply for Old Age Pension</h1>
+  <p class="hi">वृद्धावस्था पेंशन के लिए आवेदन</p>
+  <p class="lead">First we check your mobile number. Keep your phone near you, we will send a code by SMS.</p>
+  <div class="copy">&copy; 2026 Sewa Setu. All rights reserved.</div>
+</section>
+
+<main class="side">
+  <div class="card">
+    <a class="back" href="/"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Home</a>
+
+    <ol class="steps" aria-label="Application progress">
+      <li class="current" aria-current="step">1. <span class="label">Mobile</span></li>
+      <li>2. <span class="label">Personal</span></li>
+      <li>3. <span class="label">Address</span></li>
+      <li>4. <span class="label">Bank</span></li>
+      <li>5. <span class="label">Documents</span></li>
+      <li>6. <span class="label">Declaration</span></li>
+    </ol>
+
+    <h2>Verify your mobile number</h2>
+    <p class="sub">अपना मोबाइल नंबर जाँचें (चरण 1 / 6)</p>
+
+    {# error from the server (wrong captcha, bad number...) or flash(), if your Flask code sends one #}
+    {% set flashed = get_flashed_messages() %}
+    {% if error or flashed %}
+    <div class="msg" role="alert">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p>{% if error %}{{ error }}{% else %}{{ flashed[0] }}{% endif %}
+        <small>Please check and try again. / कृपया जाँचकर फिर कोशिश करें।</small></p>
+    </div>
+    {% endif %}
+
+    <div class="msg" id="clientError" role="alert" hidden>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p id="clientErrorText"></p>
+    </div>
+
+    <form method="post" id="mobileForm" novalidate>
+      <label for="mobile">Mobile number
+        <small>10 digits, without +91 or 0 &middot; 10 अंकों का नंबर</small>
+      </label>
+      <input type="tel" class="num" id="mobile" name="mobile" maxlength="10"
+             inputmode="numeric" autocomplete="tel-national" placeholder="98XXXXXXXX" autofocus>
+
+      <div class="captcha">
+        <label for="captcha">Security check: what is {{ captcha_q }}?
+          <small>Type the answer in numbers &middot; उत्तर अंकों में लिखें</small>
+        </label>
+        <input type="text" class="short" id="captcha" name="captcha"
+               inputmode="numeric" autocomplete="off">
+      </div>
+
+      <button class="btn" type="submit"><span>Send OTP<small>OTP भेजें</small></span></button>
+    </form>
+
+    <p class="note">The OTP comes by SMS and is valid for 5 minutes.<br>OTP SMS से आएगा और 5 मिनट तक मान्य रहेगा।</p>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById('mobileForm');
+    var mobile = document.getElementById('mobile');
+    var captcha = document.getElementById('captcha');
+    var box = document.getElementById('clientError');
+    var text = document.getElementById('clientErrorText');
+
+    // keep only digits while typing
+    [mobile, captcha].forEach(function (el) {
+      el.addEventListener('input', function () { el.value = el.value.replace(/\D/g, ''); el.classList.remove('bad'); });
+    });
+
+    function fail(el, en, hi) {
+      text.innerHTML = en + '<small style="display:block;font-size:.95rem">' + hi + '</small>';
+      box.hidden = false;
+      el.classList.add('bad');
+      el.focus();
+    }
+
+    form.addEventListener('submit', function (e) {
+      box.hidden = true;
+      if (!/^[6-9]\d{9}$/.test(mobile.value)) {
+        e.preventDefault();
+        fail(mobile, 'Enter a 10 digit mobile number.', '10 अंकों का मोबाइल नंबर लिखें।');
+      } else if (!captcha.value) {
+        e.preventDefault();
+        fail(captcha, 'Type the answer to the security check.', 'सुरक्षा जाँच का उत्तर लिखें।');
+      }
+    });
+  })();
+</script>
+</body>
+</html>

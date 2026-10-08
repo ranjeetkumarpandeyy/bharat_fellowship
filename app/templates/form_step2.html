@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Step 3: Address Details - Sewa Setu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --blue: #0284c7; --blue-deep: #026aa2; --ink: #111827; --muted: #4b5563;
+      --page: #f3f6fa; --line: #d5dbe5; --field: #6b7586; --green: #15803d;
+      --red: #b42318; --red-wash: #fdecea;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; font: 400 20px/1.55 "Mukta", system-ui, sans-serif; color: var(--ink); }
+
+    /* left panel */
+    .intro { flex: 1 1 38%; background: var(--blue); color: #fff; padding: 56px 52px 40px; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; }
+    .logo { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-size: 2rem; font-weight: 700; }
+    .logo svg { width: 46px; height: 46px; }
+    .intro h1 { margin: auto 0 0; padding-top: 48px; font-size: 2.5rem; line-height: 1.15; font-weight: 700; }
+    .intro .hi { margin: 8px 0 0; font-size: 1.4rem; font-weight: 600; }
+    .intro .lead { margin: 20px 0 auto; max-width: 26em; font-size: 1.1rem; }
+    .copy { margin-top: 36px; font-size: .9rem; opacity: .75; }
+
+    /* right card */
+    .side { flex: 1 1 62%; background: var(--page); padding: 28px; display: flex; align-items: flex-start; justify-content: center; }
+    .card { width: 100%; max-width: 620px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 36px 30px; box-shadow: 0 2px 10px rgba(17,24,39,.07); }
+
+    .steps { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 6px; }
+    .steps li { flex: 1; border-top: 5px solid var(--line); padding-top: 6px; font-size: .82rem; line-height: 1.2; color: var(--muted); }
+    .steps li.done { border-top-color: var(--green); color: var(--ink); }
+    .steps li.current { border-top-color: var(--blue); color: var(--ink); font-weight: 600; }
+
+    h2 { margin: 0; font-size: 1.8rem; line-height: 1.2; font-weight: 700; }
+    .sub { margin: 2px 0 6px; color: var(--muted); }
+
+    .msg { display: flex; gap: 10px; margin: 14px 0 4px; padding: 12px 14px; border-radius: 10px; background: var(--red-wash); border: 1px solid #efb1aa; color: #6b1a12; }
+    .msg svg { flex: none; width: 24px; height: 24px; margin-top: 3px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .msg p { margin: 0; }
+    .msg small { display: block; font-size: .95rem; }
+    .msg[hidden] { display: none; }
+
+    label { display: block; margin: 24px 0 4px; font-weight: 700; }
+    label small { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; }
+    .req { color: var(--red); }
+    input[type=text], select {
+      display: block; width: 100%; min-height: 58px; padding: 8px 14px;
+      font: inherit; font-size: 1.2rem; color: var(--ink);
+      background: #fff; border: 2px solid var(--field); border-radius: 10px;
+    }
+    select { appearance: none; padding-right: 44px; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; }
+    input:focus, select:focus { border-color: var(--blue); }
+    .bad { border-color: var(--red) !important; background-color: #fff8f7 !important; }
+    .fielderr { margin: 6px 0 0; color: var(--red); font-weight: 600; font-size: .98rem; }
+    .fielderr[hidden] { display: none; }
+    :focus-visible { outline: 4px solid #f59e0b; outline-offset: 2px; }
+
+    .help { margin: 22px 0 0; padding: 10px 14px; border-radius: 10px; background: #f3f6fa; border: 1px solid var(--line); color: var(--muted); font-size: .98rem; }
+
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 66px; margin-top: 28px; padding: 10px 18px; border: 0; border-radius: 10px; background: var(--blue); color: #fff; font: 700 1.3rem/1.2 inherit; font-family: inherit; cursor: pointer; }
+    .btn:hover { background: var(--blue-deep); }
+    .btn:disabled { background: #7aa7be; cursor: wait; }
+    .btn small { display: block; font-size: .95rem; font-weight: 400; }
+
+    @media (max-width: 860px) {
+      body { flex-direction: column; font-size: 19px; }
+      .intro { position: static; height: auto; padding: 24px 22px 26px; }
+      .intro h1 { margin: 0; padding-top: 22px; font-size: 1.9rem; }
+      .intro .hi { font-size: 1.15rem; }
+      .intro .lead, .copy { display: none; }
+      .side { padding: 14px 12px 28px; }
+      .card { padding: 22px 16px 24px; }
+      .steps li:not(.current) .label { display: none; }
+      .steps li.current { flex: 4; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="intro">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 32 Q24 4 45 32"/><path d="M3 38h42"/><path d="M12 38V24M24 38V15M36 38V24" stroke-width="2.5"/>
+    </svg>
+    Sewa Setu
+  </a>
+  <h1>Where do you live?</h1>
+  <p class="hi">आप कहाँ रहते हैं?</p>
+  <p class="lead">Tell us your village or town and your block. This helps the department find your application.</p>
+  <div class="copy">&copy; 2026 Sewa Setu. All rights reserved.</div>
+</section>
+
+<main class="side">
+  <div class="card">
+    <ol class="steps" aria-label="Application progress">
+      <li class="done">1. <span class="label">Mobile</span></li>
+      <li class="done">2. <span class="label">Personal</span></li>
+      <li class="current" aria-current="step">3. <span class="label">Address</span></li>
+      <li>4. <span class="label">Bank</span></li>
+      <li>5. <span class="label">Documents</span></li>
+      <li>6. <span class="label">Declaration</span></li>
+    </ol>
+
+    <h2>Address details</h2>
+    <p class="sub">पते की जानकारी (चरण 3 / 6)</p>
+
+    {# error from the server or flash(), if your Flask code sends one #}
+    {% set flashed = get_flashed_messages() %}
+    {% if error or flashed %}
+    <div class="msg" role="alert">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p>{% if error %}{{ error }}{% else %}{{ flashed[0] }}{% endif %}
+        <small>Please check and try again. / कृपया जाँचकर फिर कोशिश करें।</small></p>
+    </div>
+    {% endif %}
+
+    <div class="msg" id="clientError" role="alert" hidden>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p>Some answers need fixing. Look at the red boxes below.<small>कुछ जानकारी ठीक करनी है। नीचे लाल डिब्बे देखें।</small></p>
+    </div>
+
+    <form method="post" id="addressForm" novalidate>
+      <label for="village">Village / Town <span class="req" aria-hidden="true">*</span>
+        <small>गाँव / शहर का नाम</small>
+      </label>
+      <input type="text" id="village" name="village" autocomplete="address-level2"
+             value="{{ data.get('village','') }}" autofocus>
+      <p class="fielderr" id="villageErr" hidden>Write your village or town. / अपने गाँव या शहर का नाम लिखें।</p>
+
+      <label for="block">Block <span class="req" aria-hidden="true">*</span>
+        <small>ब्लॉक (खंड)</small>
+      </label>
+      <select id="block" name="block">
+        <option value="">-- Select / चुनें --</option>
+        {% for b in blocks %}
+        <option value="{{ b }}" {% if data.get('block')==b %}selected{% endif %}>{{ b }}</option>
+        {% endfor %}
+      </select>
+      <p class="fielderr" id="blockErr" hidden>Choose your block from the list. / सूची में से अपना ब्लॉक चुनें।</p>
+
+      <p class="help">Not sure of your block? Ask at your nearest Block Development Office.<br>
+        ब्लॉक पता न हो तो अपने नज़दीकी खंड विकास कार्यालय में पूछें।</p>
+
+      <button class="btn" type="submit" id="go"><span>Save &amp; Continue<small>सहेजें और आगे बढ़ें</small></span></button>
+    </form>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById('addressForm');
+    var village = document.getElementById('village');
+    var block = document.getElementById('block');
+    var villageErr = document.getElementById('villageErr');
+    var blockErr = document.getElementById('blockErr');
+    var top = document.getElementById('clientError');
+    var go = document.getElementById('go');
+
+    village.addEventListener('input', function () { village.classList.remove('bad'); villageErr.hidden = true; });
+    block.addEventListener('change', function () { block.classList.remove('bad'); blockErr.hidden = true; });
+
+    form.addEventListener('submit', function (e) {
+      var bad = null;
+      villageErr.hidden = true; blockErr.hidden = true;
+      village.classList.remove('bad'); block.classList.remove('bad');
+
+      if (village.value.trim().length < 2) { villageErr.hidden = false; village.classList.add('bad'); bad = village; }
+      if (!block.value) { blockErr.hidden = false; block.classList.add('bad'); bad = bad || block; }
+
+      if (bad) { e.preventDefault(); top.hidden = false; bad.focus(); return; }
+      top.hidden = true;
+      go.disabled = true;
+      go.firstElementChild.innerHTML = 'Saving... please wait<small>सहेजा जा रहा है... कृपया रुकें</small>';
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sewa Setu - Old Age Pension / वृद्धावस्था पेंशन</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --blue: #0284c7;
+      --blue-deep: #026aa2;
+      --ink: #111827;
+      --muted: #4b5563;
+      --page: #f3f6fa;
+      --line: #d5dbe5;
+      --amber: #b45309;
+      --amber-wash: #fff4dc;
+      --red: #b42318;
+      --red-wash: #fdecea;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex;
+      font: 400 20px/1.55 "Mukta", system-ui, sans-serif; color: var(--ink);
+    }
+
+    /* ---------- left: blue panel ---------- */
+    .intro {
+      flex: 1 1 50%; background: var(--blue); color: #fff;
+      padding: 56px 60px; display: flex; flex-direction: column;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; font-size: 2rem; font-weight: 700; }
+    .logo svg { width: 46px; height: 46px; }
+    .intro h1 { margin: auto 0 0; padding-top: 56px; font-size: 3.1rem; line-height: 1.12; font-weight: 700; }
+    .intro .hi { margin: 8px 0 0; font-size: 1.6rem; font-weight: 600; opacity: .95; }
+    .intro .lead { margin: 22px 0 28px; max-width: 30em; font-size: 1.15rem; }
+    .points { list-style: none; margin: 0 0 auto; padding: 0; }
+    .points li { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; font-size: 1.15rem; }
+    .points .ico {
+      flex: none; width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(255,255,255,.18); display: grid; place-items: center;
+    }
+    .points svg { width: 26px; height: 26px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .copy { margin-top: 40px; font-size: .9rem; opacity: .75; }
+
+    /* ---------- right: card ---------- */
+    .side { flex: 1 1 50%; background: var(--page); padding: 28px; display: flex; align-items: center; justify-content: center; }
+    .card {
+      width: 100%; max-width: 560px; background: #fff;
+      border: 1px solid var(--line); border-radius: 16px;
+      padding: 36px 36px 30px; box-shadow: 0 2px 10px rgba(17,24,39,.07);
+    }
+    .card .mark { display: flex; justify-content: center; margin-bottom: 8px; }
+    .card .mark svg { width: 54px; height: 54px; }
+    .card h2 { margin: 0; text-align: center; font-size: 1.9rem; line-height: 1.2; font-weight: 700; }
+    .card .sub { margin: 4px 0 20px; text-align: center; color: var(--muted); }
+
+    .deadline {
+      margin: 0 0 22px; padding: 12px 16px; border-radius: 10px;
+      background: var(--amber-wash); border: 1px solid #e8c47a; color: #5c3a05;
+    }
+    .deadline.closed { background: var(--red-wash); border-color: #efb1aa; color: #6b1a12; }
+    .deadline p { margin: 0; }
+    .deadline b { font-size: 1.1rem; }
+
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      width: 100%; min-height: 64px; padding: 10px 18px; margin-bottom: 14px;
+      border-radius: 10px; text-decoration: none; text-align: center; line-height: 1.25;
+      font-size: 1.2rem; font-weight: 700;
+    }
+    .btn small { display: block; font-size: .95rem; font-weight: 400; }
+    .btn svg { flex: none; width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .btn.main { background: var(--blue); color: #fff; }
+    .btn.main:hover { background: var(--blue-deep); }
+    .btn.alt { background: #fff; color: var(--blue-deep); border: 2px solid var(--blue); }
+    .btn.alt:hover { background: #eef7fc; }
+    :focus-visible { outline: 4px solid #f59e0b; outline-offset: 2px; }
+
+    .or { display: flex; align-items: center; gap: 14px; margin: 22px 0 16px; font-size: .9rem; color: var(--muted); }
+    .or::before, .or::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
+
+    .how h3 { margin: 0 0 12px; font-size: 1.2rem; }
+    .how ol { list-style: none; margin: 0; padding: 0; }
+    .how li { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; line-height: 1.35; }
+    .how .n {
+      flex: none; width: 36px; height: 36px; border-radius: 50%;
+      background: #e0f2fc; color: var(--blue-deep); font-weight: 700;
+      display: grid; place-items: center;
+    }
+    .how li span small { display: block; color: var(--muted); font-size: .95rem; }
+
+    .help {
+      margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line);
+      font-size: .98rem; color: var(--muted); text-align: center;
+    }
+
+    /* ---------- phones ---------- */
+    @media (max-width: 860px) {
+      body { flex-direction: column; font-size: 19px; }
+      .intro { padding: 28px 22px 30px; }
+      .intro h1 { margin: 0; padding-top: 26px; font-size: 2.1rem; }
+      .intro .hi { font-size: 1.3rem; }
+      .intro .lead { margin: 14px 0 0; }
+      .points, .copy { display: none; }
+      .side { padding: 16px 12px 28px; align-items: flex-start; }
+      .card { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="intro">
+  <div class="logo">
+    <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 32 Q24 4 45 32"/><path d="M3 38h42"/><path d="M12 38V24M24 38V15M36 38V24" stroke-width="2.5"/>
+    </svg>
+    Sewa Setu
+  </div>
+
+  <h1>Old Age Pension<br>from your home</h1>
+  <p class="hi">वृद्धावस्था पेंशन के लिए घर बैठे आवेदन करें</p>
+  <p class="lead">Citizens aged 60 years and above, living in Purvanchal, get
+    <b>Rs. 250 every month</b>. You only need your mobile phone and your age proof.</p>
+
+  <ul class="points">
+    <li><span class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>Apply with your mobile number</li>
+    <li><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 2h9l4 4v16H6z"/><path d="M14 2v5h5M9 13h7M9 17h7"/></svg></span>Keep your age proof ready</li>
+    <li><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></span>Check your status any time</li>
+  </ul>
+  <div class="copy">&copy; 2026 Sewa Setu. All rights reserved.</div>
+</section>
+
+<main class="side">
+  <div class="card">
+    <div class="mark">
+      <svg viewBox="0 0 48 48" fill="none" stroke="#0284c7" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+        <path d="M3 32 Q24 4 45 32"/><path d="M3 38h42"/><path d="M12 38V24M24 38V15M36 38V24" stroke-width="2.5"/>
+      </svg>
+    </div>
+    <h2>Welcome to Sewa Setu</h2>
+    <p class="sub">सेवा सेतु में आपका स्वागत है</p>
+
+    {% if hours_left is not none %}
+    <div class="deadline">
+      <p><b>Last date: 31 October, midnight</b><br>
+      About {{ hours_left }} hours left &middot; आवेदन के लिए लगभग {{ hours_left }} घंटे बाकी हैं</p>
+    </div>
+    {% else %}
+    <div class="deadline closed">
+      <p><b>Applications are now closed.</b><br>आवेदन की अवधि समाप्त हो चुकी है।</p>
+    </div>
+    {% endif %}
+
+    <a class="btn main" href="/apply">
+      <svg viewBox="0 0 24 24"><path d="M6 2h9l4 4v16H6z"/><path d="M14 2v5h5M12 11v6M9 14h6"/></svg>
+      <span>Apply for Pension<small>पेंशन के लिए आवेदन करें</small></span>
+    </a>
+    <a class="btn alt" href="/status">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+      <span>Check Application Status<small>आवेदन की स्थिति देखें</small></span>
+    </a>
+
+    <div class="or">How to apply</div>
+
+    <div class="how">
+      <ol>
+        <li><span class="n">1</span><span>Verify your mobile number with OTP<small>मोबाइल नंबर पर आए OTP से जाँच करें</small></span></li>
+        <li><span class="n">2</span><span>Fill in your details, address and bank account<small>अपना नाम, पता और बैंक खाता भरें</small></span></li>
+        <li><span class="n">3</span><span>Upload your age proof (JPG or PDF, up to 5 MB)<small>उम्र का प्रमाण अपलोड करें</small></span></li>
+        <li><span class="n">4</span><span>Submit, and write down your Application Number<small>जमा करें और आवेदन संख्या लिख लें</small></span></li>
+      </ol>
+    </div>
+
+    <p class="help">Need help? Visit your nearest Block Development Office.<br>
+      सहायता के लिए अपने नज़दीकी खंड विकास कार्यालय (BDO) जाएँ।</p>
+  </div>
+</main>
+
+</body>
+</html>

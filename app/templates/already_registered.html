@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+
+  <title>Mobile Number Already Registered - Sewa Setu</title>
+
+  <style>
+
+    :root {
+      --navy: #123b63;
+      --blue: #087fbd;
+      --blue-dark: #075f8f;
+
+      --ink: #17212b;
+      --muted: #5d6b78;
+
+      --page: #f3f6f9;
+      --card: #ffffff;
+      --line: #d6dee6;
+
+      --yellow: #b77900;
+      --yellow-soft: #fff8e7;
+
+      --green: #167344;
+      --red: #b42318;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      background: var(--page);
+
+      color: var(--ink);
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+
+    /* Government header */
+
+    .topbar {
+      background: var(--navy);
+
+      border-bottom: 4px solid #f59e0b;
+
+      color: #ffffff;
+
+      padding: 17px 30px;
+    }
+
+
+    .topbar-inner {
+      max-width: 1100px;
+
+      margin: 0 auto;
+    }
+
+
+    .government {
+      font-size: 13px;
+
+      opacity: .9;
+    }
+
+
+    .site-name {
+      margin-top: 2px;
+
+      font-size: 23px;
+
+      font-weight: 800;
+    }
+
+
+    .department {
+      font-size: 13px;
+
+      opacity: .88;
+    }
+
+
+    /* Main */
+
+    .page {
+
+      min-height: calc(100vh - 94px);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 40px 20px;
+    }
+
+
+    .card {
+
+      width: 100%;
+
+      max-width: 700px;
+
+      background: var(--card);
+
+      border: 1px solid var(--line);
+
+      border-radius: 10px;
+
+      box-shadow:
+        0 5px 20px rgba(25, 50, 70, .08);
+
+      overflow: hidden;
+    }
+
+
+    /* Notice */
+
+    .notice {
+
+      padding: 30px 35px;
+
+      background: var(--yellow-soft);
+
+      border-bottom: 1px solid #efd48c;
+
+      text-align: center;
+    }
+
+
+    .notice-icon {
+
+      width: 62px;
+
+      height: 62px;
+
+      margin: 0 auto 15px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: #f0b429;
+
+      color: white;
+
+      font-size: 30px;
+
+      font-weight: 900;
+    }
+
+
+    .notice h1 {
+
+      margin: 0;
+
+      color: #704d00;
+
+      font-size: 27px;
+
+      line-height: 1.25;
+
+      font-weight: 800;
+    }
+
+
+    .notice p {
+
+      margin: 9px 0 0;
+
+      color: #67552f;
+
+      font-size: 15px;
+
+      line-height: 1.6;
+    }
+
+
+    /* Content */
+
+    .content {
+
+      padding: 30px 35px;
+    }
+
+
+    .intro {
+
+      margin: 0 0 22px;
+
+      color: var(--muted);
+
+      font-size: 15px;
+
+      line-height: 1.65;
+    }
+
+
+    .application {
+
+      border: 1px solid var(--line);
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      margin-bottom: 24px;
+    }
+
+
+    .application-title {
+
+      padding: 13px 17px;
+
+      background: #eef4f8;
+
+      color: var(--navy);
+
+      font-weight: 800;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+
+    .detail {
+
+      display: grid;
+
+      grid-template-columns: 190px 1fr;
+
+      border-bottom: 1px solid #e7edf1;
+    }
+
+
+    .detail:last-child {
+
+      border-bottom: 0;
+    }
+
+
+    .label {
+
+      padding: 13px 17px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      background: #fafcfd;
+    }
+
+
+    .value {
+
+      padding: 13px 17px;
+
+      font-weight: 700;
+    }
+
+
+    .status {
+
+      display: inline-block;
+
+      padding: 4px 11px;
+
+      border-radius: 20px;
+
+      background: #fff1c7;
+
+      color: #795400;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      text-transform: capitalize;
+    }
+
+
+    .instruction {
+
+      padding: 17px;
+
+      margin-bottom: 24px;
+
+      border-left: 4px solid var(--blue);
+
+      background: #eef7fc;
+
+      color: #29495f;
+
+      border-radius: 6px;
+
+      line-height: 1.6;
+
+      font-size: 14px;
+    }
+
+
+    .instruction strong {
+
+      display: block;
+
+      margin-bottom: 3px;
+
+      color: var(--navy);
+
+    }
+
+
+    /* Buttons */
+
+    .actions {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+    }
+
+
+    .button {
+
+      min-height: 50px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 10px 16px;
+
+      border-radius: 7px;
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      text-align: center;
+    }
+
+
+    .button.primary {
+
+      background: var(--blue);
+
+      color: white;
+    }
+
+
+    .button.primary:hover {
+
+      background: var(--blue-dark);
+    }
+
+
+    .button.secondary {
+
+      background: white;
+
+      color: var(--navy);
+
+      border: 1px solid #aebdca;
+    }
+
+
+    .button.secondary:hover {
+
+      background: #f5f8fa;
+    }
+
+
+    .help {
+
+      margin-top: 23px;
+
+      padding-top: 17px;
+
+      border-top: 1px solid var(--line);
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+
+    @media (max-width: 600px) {
+
+      .topbar {
+
+        padding: 14px 17px;
+      }
+
+
+      .page {
+
+        padding: 20px 12px;
+      }
+
+
+      .notice,
+      .content {
+
+        padding: 25px 20px;
+      }
+
+
+      .notice h1 {
+
+        font-size: 23px;
+      }
+
+
+      .detail {
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .label {
+
+        padding-bottom: 4px;
+
+        border-bottom: 0;
+      }
+
+
+      .value {
+
+        padding-top: 4px;
+      }
+
+
+      .actions {
+
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+    <div class="government">
+      GOVERNMENT OF PURVANCHAL
+    </div>
+
+    <div class="site-name">
+      Sewa Setu
+    </div>
+
+    <div class="department">
+      Department of Social Welfare · Old Age Pension Scheme
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<main class="page">
+
+
+  <section class="card">
+
+
+    <div class="notice">
+
+      <div class="notice-icon">
+        !
+      </div>
+
+      <h1>
+        Mobile Number Already Registered
+      </h1>
+
+      <p>
+        This mobile number is already registered with Sewa Setu.
+      </p>
+
+    </div>
+
+
+
+    <div class="content">
+
+
+      <p class="intro">
+
+        We found an existing pension application associated with
+        this mobile number. You do not need to submit another
+        application.
+
+        <br><br>
+
+        Please use the <strong>Application Status</strong> service
+        to view the details and current status of your application.
+
+      </p>
+
+
+
+      <div class="application">
+
+
+        <div class="application-title">
+
+          Existing Application
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="label">
+            Application Number
+          </div>
+
+          <div class="value">
+            {{ app_no }}
+          </div>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="label">
+            Current Status
+          </div>
+
+          <div class="value">
+
+            <span class="status">
+              {{ status|replace('_', ' ')|capitalize }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="instruction">
+
+        <strong>
+          What should I do now?
+        </strong>
+
+        Go to <b>Check Application Status</b> and enter your
+        registered mobile number and date of birth to view
+        your application.
+
+      </div>
+
+
+
+      <div class="actions">
+
+
+        <a
+          class="button primary"
+          href="/status">
+
+          Check Application Status
+
+        </a>
+
+
+        <a
+          class="button secondary"
+          href="/">
+
+          Return to Home
+
+        </a>
+
+
+      </div>
+
+
+
+      <div class="help">
+
+        If you need assistance, please visit your nearest
+        Block Development Office.
+
+        <br>
+
+        Department of Social Welfare · Sewa Setu
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+</body>
+
+</html>

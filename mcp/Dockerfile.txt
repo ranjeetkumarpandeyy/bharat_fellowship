@@ -1,0 +1,16 @@
+@'
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /app/mcp
+
+WORKDIR /app
+
+EXPOSE 8101
+
+CMD ["python", "-m", "mcp.citizen_server"]
+'@ | Set-Content -Path .\mcp\Dockerfile -Encoding UTF8

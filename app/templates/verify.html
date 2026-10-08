@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enter OTP - Sewa Setu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --blue: #0284c7; --blue-deep: #026aa2; --ink: #111827; --muted: #4b5563;
+      --page: #f3f6fa; --line: #d5dbe5; --field: #6b7586;
+      --red: #b42318; --red-wash: #fdecea;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; font: 400 20px/1.55 "Mukta", system-ui, sans-serif; color: var(--ink); }
+
+    /* left panel */
+    .intro { flex: 1 1 42%; background: var(--blue); color: #fff; padding: 56px 56px 40px; display: flex; flex-direction: column; }
+    .logo { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-size: 2rem; font-weight: 700; }
+    .logo svg { width: 46px; height: 46px; }
+    .intro h1 { margin: auto 0 0; padding-top: 48px; font-size: 2.6rem; line-height: 1.15; font-weight: 700; }
+    .intro .hi { margin: 8px 0 0; font-size: 1.4rem; font-weight: 600; }
+    .intro .lead { margin: 20px 0 auto; max-width: 28em; font-size: 1.1rem; }
+    .copy { margin-top: 36px; font-size: .9rem; opacity: .75; }
+
+    /* right card */
+    .side { flex: 1 1 58%; background: var(--page); padding: 28px; display: flex; align-items: center; justify-content: center; }
+    .card { width: 100%; max-width: 580px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 36px 30px; box-shadow: 0 2px 10px rgba(17,24,39,.07); }
+
+    .back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 18px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); text-decoration: none; font-size: .95rem; font-weight: 600; background: #fff; }
+    .back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .back:hover { background: #f3f6fa; }
+
+    .steps { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 6px; }
+    .steps li { flex: 1; border-top: 5px solid var(--line); padding-top: 6px; font-size: .82rem; line-height: 1.2; color: var(--muted); }
+    .steps li.current { border-top-color: var(--blue); color: var(--ink); font-weight: 600; }
+
+    h2 { margin: 0; font-size: 1.8rem; line-height: 1.2; font-weight: 700; }
+    .sub { margin: 2px 0 14px; color: var(--muted); }
+
+    .sent { display: flex; gap: 12px; align-items: center; margin: 0 0 6px; padding: 12px 16px; border-radius: 10px; background: #e8f4fb; border: 1px solid #b9dcf0; }
+    .sent svg { flex: none; width: 28px; height: 28px; stroke: var(--blue-deep); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .sent p { margin: 0; line-height: 1.35; }
+    .sent b { font-size: 1.35rem; letter-spacing: .05em; }
+    .sent small { display: block; color: var(--muted); font-size: .95rem; }
+
+    .msg { display: flex; gap: 10px; margin: 14px 0 4px; padding: 12px 14px; border-radius: 10px; background: var(--red-wash); border: 1px solid #efb1aa; color: #6b1a12; }
+    .msg svg { flex: none; width: 24px; height: 24px; margin-top: 3px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .msg p { margin: 0; }
+    .msg small { display: block; font-size: .95rem; }
+    .msg[hidden] { display: none; }
+
+    label { display: block; margin: 22px 0 6px; font-weight: 700; }
+    label small { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; }
+    input.otp {
+      display: block; width: 100%; max-width: 300px; min-height: 66px; padding: 8px 14px;
+      font: inherit; font-size: 2rem; font-weight: 600; letter-spacing: .45em; text-indent: .2em;
+      color: var(--ink); background: #fff; border: 2px solid var(--field); border-radius: 10px;
+    }
+    input.otp:focus { border-color: var(--blue); }
+    input.otp.bad { border-color: var(--red); background: #fff8f7; }
+    :focus-visible { outline: 4px solid #f59e0b; outline-offset: 2px; }
+
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 64px; margin-top: 26px; padding: 10px 18px; border: 0; border-radius: 10px; background: var(--blue); color: #fff; font: 700 1.25rem/1.2 inherit; font-family: inherit; cursor: pointer; }
+    .btn:hover { background: var(--blue-deep); }
+    .btn small { display: block; font-size: .95rem; font-weight: 400; }
+
+    .alt { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: .98rem; }
+    .alt a { color: var(--blue-deep); font-weight: 700; }
+
+    @media (max-width: 860px) {
+      body { flex-direction: column; font-size: 19px; }
+      .intro { padding: 24px 22px 26px; }
+      .intro h1 { margin: 0; padding-top: 22px; font-size: 1.9rem; }
+      .intro .hi { font-size: 1.15rem; }
+      .intro .lead, .copy { display: none; }
+      .side { padding: 14px 12px 28px; align-items: flex-start; }
+      .card { padding: 22px 16px 24px; }
+      .steps li:not(.current) .label { display: none; }
+      .steps li.current { flex: 4; }
+      input.otp { max-width: 100%; font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="intro">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 32 Q24 4 45 32"/><path d="M3 38h42"/><path d="M12 38V24M24 38V15M36 38V24" stroke-width="2.5"/>
+    </svg>
+    Sewa Setu
+  </a>
+  <h1>Enter the code we sent you</h1>
+  <p class="hi">आपके फ़ोन पर भेजा गया कोड लिखें</p>
+  <p class="lead">Look at the SMS on your phone. It has a 6 digit number. Type that number here.</p>
+  <div class="copy">&copy; 2026 Sewa Setu. All rights reserved.</div>
+</section>
+
+<main class="side">
+  <div class="card">
+    <a class="back" href="/apply"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Change number</a>
+
+    <ol class="steps" aria-label="Application progress">
+      <li class="current" aria-current="step">1. <span class="label">Mobile</span></li>
+      <li>2. <span class="label">Personal</span></li>
+      <li>3. <span class="label">Address</span></li>
+      <li>4. <span class="label">Bank</span></li>
+      <li>5. <span class="label">Documents</span></li>
+      <li>6. <span class="label">Declaration</span></li>
+    </ol>
+
+    <h2>Enter OTP</h2>
+    <p class="sub">OTP दर्ज करें (चरण 1 / 6)</p>
+
+    <div class="sent">
+      <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+      <p>OTP sent to <b>{{ mobile }}</b>
+        <small>OTP इस नंबर पर भेजा गया है</small></p>
+    </div>
+
+    {# error from the server (wrong or expired OTP) or flash(), if your Flask code sends one #}
+    {% set flashed = get_flashed_messages() %}
+    {% if error or flashed %}
+    <div class="msg" role="alert">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p>{% if error %}{{ error }}{% else %}{{ flashed[0] }}{% endif %}
+        <small>Please check and try again. / कृपया जाँचकर फिर कोशिश करें।</small></p>
+    </div>
+    {% endif %}
+
+    <div class="msg" id="clientError" role="alert" hidden>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p>Enter all 6 digits of the OTP.<small>OTP के सभी 6 अंक लिखें।</small></p>
+    </div>
+
+    <form method="post" id="otpForm" novalidate>
+      <label for="otp">6 digit OTP
+        <small>Type the number from the SMS &middot; SMS में आया नंबर लिखें</small>
+      </label>
+      <input type="text" class="otp" id="otp" name="otp" maxlength="6"
+             inputmode="numeric" autocomplete="one-time-code" placeholder="------" autofocus>
+
+      <button class="btn" type="submit"><span>Verify<small>जाँचें</small></span></button>
+    </form>
+
+    <p class="alt">OTP not received or wrong number?<br>
+      <a href="/apply">Go back and enter your number again</a><br>
+      OTP नहीं आया? <a href="/apply">वापस जाकर नंबर फिर से डालें</a></p>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById('otpForm');
+    var otp = document.getElementById('otp');
+    var box = document.getElementById('clientError');
+
+    otp.addEventListener('input', function () {
+      otp.value = otp.value.replace(/\D/g, '');
+      otp.classList.remove('bad');
+      box.hidden = true;
+    });
+
+    form.addEventListener('submit', function (e) {
+      if (!/^\d{6}$/.test(otp.value)) {
+        e.preventDefault();
+        box.hidden = false;
+        otp.classList.add('bad');
+        otp.focus();
+      }
+    });
+  })();
+</script>
+</body>
+</html>

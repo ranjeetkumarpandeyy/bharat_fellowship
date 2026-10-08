@@ -1,0 +1,1158 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+/* ============================================================
+   SEWA SETU — STEP 4 BANK DETAILS
+
+   IMPORTANT:
+   This page intentionally does NOT style <body>.
+   base.html controls the body/container.
+
+   The .bank-page uses a full-bleed layout so it matches
+   the existing Step 1 / Apply page.
+   ============================================================ */
+
+.bank-page {
+    width: 100vw;
+    min-height: 100vh;
+
+    /* Break out of any centered/max-width wrapper
+       that may exist in base.html */
+    margin-left: calc(50% - 50vw);
+
+    display: grid;
+    grid-template-columns: 42% 58%;
+
+    background: #f3f6fa;
+
+    color: #111827;
+
+    font-family:
+        "Mukta",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* ============================================================
+   LEFT BLUE PANEL
+   ============================================================ */
+
+.bank-intro {
+    min-height: 100vh;
+
+    padding: 68px 60px 32px;
+
+    background: #0788c7;
+
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+}
+
+
+/* Sewa Setu logo */
+
+.bank-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+.bank-logo-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+}
+
+
+/* Main left-side content */
+
+.bank-intro-content {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    max-width: 560px;
+}
+
+
+.bank-intro h1 {
+    margin: 0;
+
+    font-size: 48px;
+
+    line-height: 1.12;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+
+.bank-intro-hi {
+    margin: 8px 0 0;
+
+    font-size: 27px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+}
+
+
+.bank-intro-description {
+    margin: 25px 0 0;
+
+    max-width: 540px;
+
+    font-size: 19px;
+
+    line-height: 1.65;
+
+    color: rgba(255,255,255,.96);
+}
+
+
+/* Bottom copyright */
+
+.bank-intro-footer {
+    margin-top: auto;
+
+    color: rgba(255,255,255,.82);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   RIGHT SIDE
+   ============================================================ */
+
+.bank-main {
+    min-height: 100vh;
+
+    padding: 30px 36px;
+
+    background: #f3f6fa;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* ============================================================
+   HOME BUTTON
+   ============================================================ */
+
+.bank-home {
+    width: 100%;
+
+    max-width: 620px;
+
+    display: flex;
+
+    justify-content: flex-start;
+}
+
+
+.bank-home a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 46px;
+
+    padding: 0 18px;
+
+    border: 1px solid #cbd6e2;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #152238;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+.bank-home a:hover {
+    border-color: #0788c7;
+
+    color: #0788c7;
+}
+
+
+/* ============================================================
+   FORM CARD
+   ============================================================ */
+
+.bank-card {
+    width: 100%;
+
+    max-width: 620px;
+
+    margin-top: 22px;
+
+    padding: 30px 38px 34px;
+
+    background: #ffffff;
+
+    border: 1px solid #d2dce6;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 3px 12px rgba(21,34,56,.08);
+}
+
+
+/* ============================================================
+   STEP PROGRESS
+   ============================================================ */
+
+.bank-steps {
+    display: flex;
+
+    gap: 7px;
+
+    margin: 0 0 28px;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.bank-step {
+    flex: 1;
+
+    min-width: 0;
+
+    border-top: 5px solid #d4dce5;
+
+    padding-top: 6px;
+
+    color: #435267;
+
+    font-size: 13px;
+
+    line-height: 1.25;
+}
+
+
+.bank-step.done {
+    border-top-color: #15803d;
+}
+
+
+.bank-step.current {
+    border-top-color: #0788c7;
+
+    color: #111827;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   HEADING
+   ============================================================ */
+
+.bank-card h2 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 30px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.bank-subtitle {
+    margin: 4px 0 0;
+
+    color: #4b5563;
+
+    font-size: 18px;
+
+    line-height: 1.45;
+}
+
+
+/* ============================================================
+   FORM
+   ============================================================ */
+
+.bank-form {
+    margin-top: 27px;
+}
+
+
+.bank-label {
+    display: block;
+
+    margin: 22px 0 5px;
+
+    color: #111827;
+
+    font-size: 18px;
+
+    line-height: 1.35;
+
+    font-weight: 800;
+}
+
+
+.bank-label:first-child {
+    margin-top: 0;
+}
+
+
+.bank-label-hindi {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #596575;
+
+    font-size: 15px;
+
+    font-weight: 400;
+}
+
+
+.bank-required {
+    color: #b42318;
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.bank-input {
+    width: 100%;
+
+    min-height: 60px;
+
+    padding: 10px 15px;
+
+    border: 2px solid #6b7586;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 19px;
+
+    line-height: 1.3;
+
+    outline: none;
+}
+
+
+.bank-input:focus {
+    border-color: #0788c7;
+
+    box-shadow:
+        0 0 0 3px rgba(7,136,199,.14);
+}
+
+
+/* ============================================================
+   IFSC HELP
+   ============================================================ */
+
+.bank-input-hint {
+    margin: 6px 0 0;
+
+    color: #667384;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+}
+
+
+/* ============================================================
+   IMPORTANT INFORMATION
+   ============================================================ */
+
+.bank-note {
+    margin: 22px 0 0;
+
+    padding: 15px 16px;
+
+    border: 1px solid #d3dce6;
+
+    border-radius: 10px;
+
+    background: #f4f7fa;
+
+    color: #4b5563;
+
+    font-size: 15px;
+
+    line-height: 1.55;
+}
+
+
+.bank-note strong {
+    color: #111827;
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.bank-error {
+    margin-top: 7px;
+
+    color: #b42318;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   BUTTON
+   ============================================================ */
+
+.bank-button {
+    width: 100%;
+
+    min-height: 66px;
+
+    margin-top: 25px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #0788c7;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    line-height: 1.25;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
+}
+
+
+.bank-button:hover {
+    background: #0678b0;
+
+    transform: translateY(-1px);
+}
+
+
+.bank-button:active {
+    transform: translateY(0);
+}
+
+
+.bank-button:disabled {
+    background: #7daec6;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+.bank-button-hindi {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+/* ============================================================
+   RIGHT FOOTER
+   ============================================================ */
+
+.bank-footer {
+    width: 100%;
+
+    max-width: 620px;
+
+    padding: 17px 0 10px;
+
+    text-align: center;
+
+    color: #7b8794;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 950px) {
+
+    .bank-page {
+        grid-template-columns: 1fr;
+    }
+
+
+    .bank-intro {
+        min-height: auto;
+
+        padding: 32px 28px 38px;
+    }
+
+
+    .bank-intro-content {
+        margin-top: 70px;
+        margin-bottom: 45px;
+    }
+
+
+    .bank-intro h1 {
+        font-size: 38px;
+    }
+
+
+    .bank-intro-hi {
+        font-size: 23px;
+    }
+
+
+    .bank-intro-description {
+        font-size: 17px;
+    }
+
+
+    .bank-intro-footer {
+        margin-top: 0;
+    }
+
+
+    .bank-main {
+        min-height: auto;
+
+        padding: 22px 14px 35px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .bank-intro {
+        padding: 25px 20px 30px;
+    }
+
+
+    .bank-logo {
+        font-size: 28px;
+    }
+
+
+    .bank-intro h1 {
+        font-size: 33px;
+    }
+
+
+    .bank-intro-hi {
+        font-size: 21px;
+    }
+
+
+    .bank-intro-description {
+        font-size: 16px;
+    }
+
+
+    .bank-card {
+        padding: 23px 18px 25px;
+
+        border-radius: 12px;
+    }
+
+
+    .bank-card h2 {
+        font-size: 26px;
+    }
+
+
+    .bank-subtitle {
+        font-size: 16px;
+    }
+
+
+    .bank-step {
+        font-size: 11px;
+    }
+
+
+    .bank-input {
+        min-height: 57px;
+
+        font-size: 18px;
+    }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+.bank-input:focus-visible,
+.bank-home a:focus-visible,
+.bank-button:focus-visible {
+    outline: 4px solid #f59e0b;
+
+    outline-offset: 3px;
+}
+</style>
+
+
+<!-- ============================================================
+     FULL BANK PAGE
+     ============================================================ -->
+
+<div class="bank-page">
+
+
+    <!-- ========================================================
+         LEFT BLUE PANEL
+         ======================================================== -->
+
+    <section class="bank-intro">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="/"
+            class="bank-logo"
+            aria-label="Sewa Setu home">
+
+            <svg
+                class="bank-logo-icon"
+                viewBox="0 0 48 48"
+                fill="none"
+                aria-hidden="true">
+
+                <path
+                    d="M4 31
+                       Q24 7 44 31"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+
+                <path
+                    d="M4 37H44"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+
+                <path
+                    d="M12 37V25
+                       M24 37V14
+                       M36 37V25"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <span>
+                Sewa Setu
+            </span>
+
+        </a>
+
+
+        <!-- LEFT MESSAGE -->
+
+        <div class="bank-intro-content">
+
+            <h1>
+                Give your bank details
+            </h1>
+
+            <p class="bank-intro-hi">
+                बैंक की जानकारी दें
+            </p>
+
+            <p class="bank-intro-description">
+
+                Tell us where your pension should be sent.
+                The pension will be credited directly to the
+                applicant's bank account.
+
+            </p>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="bank-intro-footer">
+
+            © 2026 Sewa Setu. All rights reserved.
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ========================================================
+         RIGHT SIDE
+         ======================================================== -->
+
+    <main class="bank-main">
+
+
+        <!-- HOME -->
+
+        <div class="bank-home">
+
+            <a href="/">
+
+                <span aria-hidden="true">
+                    ‹
+                </span>
+
+                Home
+
+            </a>
+
+        </div>
+
+
+
+        <!-- FORM CARD -->
+
+        <section class="bank-card">
+
+
+            <!-- ==================================================
+                 PROGRESS
+                 ================================================== -->
+
+            <ol
+                class="bank-steps"
+                aria-label="Application progress">
+
+                <li class="bank-step done">
+                    1. Mobile
+                </li>
+
+                <li class="bank-step done">
+                    2. Personal
+                </li>
+
+                <li class="bank-step done">
+                    3. Address
+                </li>
+
+                <li
+                    class="bank-step current"
+                    aria-current="step">
+
+                    4. Bank
+
+                </li>
+
+                <li class="bank-step">
+                    5. Documents
+                </li>
+
+                <li class="bank-step">
+                    6. Declaration
+                </li>
+
+            </ol>
+
+
+
+            <!-- ==================================================
+                 TITLE
+                 ================================================== -->
+
+            <h2>
+                Bank details
+            </h2>
+
+            <p class="bank-subtitle">
+                बैंक की जानकारी (चरण 4 / 6)
+            </p>
+
+
+
+            <!-- ==================================================
+                 FORM
+                 ================================================== -->
+
+            <form
+                method="post"
+                class="bank-form"
+                id="bankForm">
+
+
+                <!-- ==============================================
+                     ACCOUNT NUMBER
+                     ============================================== -->
+
+                <label
+                    class="bank-label"
+                    for="bank_account">
+
+                    Bank Account Number
+                    <span class="bank-required">*</span>
+
+                    <span class="bank-label-hindi">
+                        बैंक खाता संख्या
+                    </span>
+
+                </label>
+
+
+                <input
+                    class="bank-input"
+                    type="text"
+                    id="bank_account"
+                    name="bank_account"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    maxlength="18"
+                    value="{{ data.get('bank_account','') }}"
+                    placeholder="Enter bank account number">
+
+
+                <div
+                    id="bankAccountError"
+                    class="bank-error"
+                    hidden>
+
+                    Please enter a valid bank account number.
+
+                </div>
+
+
+
+                <!-- ==============================================
+                     IFSC
+                     ============================================== -->
+
+                <label
+                    class="bank-label"
+                    for="ifsc">
+
+                    IFSC Code
+
+                    <span class="bank-label-hindi">
+                        बैंक का IFSC कोड
+                    </span>
+
+                </label>
+
+
+                <input
+                    class="bank-input"
+                    type="text"
+                    id="ifsc"
+                    name="ifsc"
+                    maxlength="11"
+                    autocomplete="off"
+                    value="{{ data.get('ifsc','') }}"
+                    placeholder="Example: SBIN0001234"
+                    style="text-transform: uppercase;">
+
+
+                <p class="bank-input-hint">
+                    IFSC is usually an 11-character code printed on your
+                    bank passbook or cheque.
+                </p>
+
+
+                <div
+                    id="ifscError"
+                    class="bank-error"
+                    hidden>
+
+                    Please enter a valid IFSC code.
+
+                </div>
+
+
+
+                <!-- ==============================================
+                     IMPORTANT NOTE
+                     ============================================== -->
+
+                <div class="bank-note">
+
+                    <strong>
+                        Important / जरूरी
+                    </strong>
+
+                    <br>
+
+                    Pension will be credited by DBT to this account.
+                    Please make sure the account is in the name of
+                    the applicant.
+
+                    <br><br>
+
+                    पेंशन इसी बैंक खाते में सीधे भेजी जाएगी।
+                    कृपया सुनिश्चित करें कि बैंक खाता आवेदक के नाम पर है।
+
+                </div>
+
+
+
+                <!-- ==============================================
+                     BUTTON
+                     ============================================== -->
+
+                <button
+                    type="submit"
+                    class="bank-button"
+                    id="bankSubmit">
+
+                    Save &amp; Continue
+
+                    <span class="bank-button-hindi">
+                        सहेजें और आगे बढ़ें
+                    </span>
+
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ====================================================
+             FOOTER
+             ==================================================== -->
+
+        <div class="bank-footer">
+
+            Your information is used only for processing your
+            pension application.
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+
+<script>
+(function () {
+
+    const form =
+        document.getElementById("bankForm");
+
+    const account =
+        document.getElementById("bank_account");
+
+    const ifsc =
+        document.getElementById("ifsc");
+
+    const accountError =
+        document.getElementById("bankAccountError");
+
+    const ifscError =
+        document.getElementById("ifscError");
+
+    const submit =
+        document.getElementById("bankSubmit");
+
+
+    /* ========================================================
+       ACCOUNT NUMBER
+       ======================================================== */
+
+    account.addEventListener("input", function () {
+
+        /*
+         * Keep only numbers.
+         * This makes typing easier for elderly users.
+         */
+
+        this.value =
+            this.value.replace(/\D/g, "");
+
+        accountError.hidden = true;
+
+        this.style.borderColor = "#6b7586";
+
+    });
+
+
+    /* ========================================================
+       IFSC
+       ======================================================== */
+
+    ifsc.addEventListener("input", function () {
+
+        this.value =
+            this.value
+                .toUpperCase()
+                .replace(/\s/g, "");
+
+        ifscError.hidden = true;
+
+        this.style.borderColor = "#6b7586";
+
+    });
+
+
+    /* ========================================================
+       SUBMIT VALIDATION
+       ======================================================== */
+
+    form.addEventListener("submit", function (event) {
+
+        let valid = true;
+
+
+        /* Account number */
+
+        const accountValue =
+            account.value.trim();
+
+
+        if (!/^\d{9,18}$/.test(accountValue)) {
+
+            accountError.hidden = false;
+
+            account.style.borderColor = "#b42318";
+
+            valid = false;
+
+        }
+
+
+        /* IFSC is optional in the existing backend */
+
+        const ifscValue =
+            ifsc.value.trim();
+
+
+        if (
+            ifscValue &&
+            !/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifscValue)
+        ) {
+
+            ifscError.hidden = false;
+
+            ifsc.style.borderColor = "#b42318";
+
+            valid = false;
+
+        }
+
+
+        if (!valid) {
+
+            event.preventDefault();
+
+            if (!/^\d{9,18}$/.test(accountValue)) {
+
+                account.focus();
+
+            } else {
+
+                ifsc.focus();
+
+            }
+
+            return;
+
+        }
+
+
+        /*
+         * Prevent accidental double-click submissions.
+         */
+
+        submit.disabled = true;
+
+        submit.innerHTML =
+            "Saving... please wait" +
+            "<span class='bank-button-hindi'>" +
+            "सहेजा जा रहा है... कृपया प्रतीक्षा करें" +
+            "</span>";
+
+    });
+
+})();
+</script>
+
+{% endblock %}

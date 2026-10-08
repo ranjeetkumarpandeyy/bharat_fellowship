@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Step 6: Check and Submit - Sewa Setu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --blue: #0284c7; --blue-deep: #026aa2; --ink: #111827; --muted: #4b5563;
+      --page: #f3f6fa; --line: #d5dbe5; --field: #6b7586; --green: #15803d;
+      --red: #b42318; --red-wash: #fdecea;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; font: 400 20px/1.55 "Mukta", system-ui, sans-serif; color: var(--ink); }
+
+    /* left panel */
+    .intro { flex: 1 1 36%; background: var(--blue); color: #fff; padding: 56px 52px 40px; display: flex; flex-direction: column; }
+    .logo { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-size: 2rem; font-weight: 700; }
+    .logo svg { width: 46px; height: 46px; }
+    .intro h1 { margin: auto 0 0; padding-top: 48px; font-size: 2.5rem; line-height: 1.15; font-weight: 700; }
+    .intro .hi { margin: 8px 0 0; font-size: 1.4rem; font-weight: 600; }
+    .intro .lead { margin: 20px 0 auto; max-width: 26em; font-size: 1.1rem; }
+    .copy { margin-top: 36px; font-size: .9rem; opacity: .75; }
+
+    /* right card */
+    .side { flex: 1 1 64%; background: var(--page); padding: 28px; display: flex; align-items: flex-start; justify-content: center; }
+    .card { width: 100%; max-width: 680px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 36px 30px; box-shadow: 0 2px 10px rgba(17,24,39,.07); }
+
+    .steps { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 6px; }
+    .steps li { flex: 1; border-top: 5px solid var(--line); padding-top: 6px; font-size: .82rem; line-height: 1.2; color: var(--muted); }
+    .steps li.done { border-top-color: var(--green); color: var(--ink); }
+    .steps li.current { border-top-color: var(--blue); color: var(--ink); font-weight: 600; }
+
+    h2 { margin: 0; font-size: 1.8rem; line-height: 1.2; font-weight: 700; }
+    .sub { margin: 2px 0 18px; color: var(--muted); }
+
+    /* summary groups */
+    .group { margin: 0 0 16px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .group header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 16px; background: #eef3f8; border-bottom: 1px solid var(--line); }
+    .group h3 { margin: 0; font-size: 1.1rem; font-weight: 700; }
+    .group h3 small { font-weight: 400; color: var(--muted); font-size: .95rem; margin-left: 6px; }
+    .change { flex: none; padding: 4px 14px; border: 2px solid var(--blue); border-radius: 8px; color: var(--blue-deep); background: #fff; font-weight: 700; font-size: .95rem; text-decoration: none; }
+    .change:hover { background: #e3f3fc; }
+    dl { margin: 0; }
+    .row { display: grid; grid-template-columns: 38% 1fr; gap: 4px 14px; padding: 10px 16px; border-top: 1px solid #e6eaf0; }
+    .row:first-child { border-top: 0; }
+    dt { font-weight: 600; line-height: 1.3; }
+    dt small { display: block; font-weight: 400; color: var(--muted); font-size: .9rem; }
+    dd { margin: 0; font-size: 1.1rem; font-weight: 600; word-break: break-word; }
+    dd.empty { color: var(--red); font-weight: 400; }
+
+    /* problems */
+    .problems { margin: 6px 0 0; padding: 14px 16px; border-radius: 12px; background: var(--red-wash); border: 1px solid #efb1aa; color: #6b1a12; }
+    .problems h3 { margin: 0 0 6px; font-size: 1.15rem; }
+    .problems small { font-weight: 400; }
+    .problems ul { margin: 6px 0 0; padding-left: 1.2em; }
+    .problems li { margin-bottom: 4px; }
+
+    /* declaration */
+    .decl { margin-top: 24px; padding-top: 4px; border-top: 1px solid var(--line); }
+    .decl h3 { margin: 18px 0 8px; font-size: 1.3rem; }
+    .decl p { margin: 0 0 10px; }
+    .decl .hi-text { color: var(--muted); font-size: 1rem; }
+    .agree { display: flex; align-items: flex-start; gap: 14px; margin: 20px 0 0; padding: 14px 16px; border: 2px solid var(--field); border-radius: 12px; cursor: pointer; font-weight: 700; line-height: 1.35; }
+    .agree input { flex: none; width: 30px; height: 30px; margin: 0; accent-color: var(--blue); cursor: pointer; }
+    .agree small { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; }
+    .agree.bad { border-color: var(--red); background: #fff8f7; }
+
+    .msg { display: flex; gap: 10px; margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--red-wash); border: 1px solid #efb1aa; color: #6b1a12; }
+    .msg svg { flex: none; width: 24px; height: 24px; margin-top: 3px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .msg p { margin: 0; }
+    .msg small { display: block; font-size: .95rem; }
+    .msg[hidden] { display: none; }
+
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 66px; margin-top: 22px; padding: 10px 18px; border: 0; border-radius: 10px; background: var(--blue); color: #fff; font: 700 1.3rem/1.2 inherit; font-family: inherit; cursor: pointer; }
+    .btn:hover { background: var(--blue-deep); }
+    .btn:disabled { background: #7aa7be; cursor: wait; }
+    .btn small { display: block; font-size: .95rem; font-weight: 400; }
+    :focus-visible { outline: 4px solid #f59e0b; outline-offset: 2px; }
+
+    .note { margin: 14px 0 0; text-align: center; color: var(--muted); font-size: .98rem; }
+
+    @media (max-width: 860px) {
+      body { flex-direction: column; font-size: 19px; }
+      .intro { padding: 24px 22px 26px; }
+      .intro h1 { margin: 0; padding-top: 22px; font-size: 1.9rem; }
+      .intro .hi { font-size: 1.15rem; }
+      .intro .lead, .copy { display: none; }
+      .side { padding: 14px 12px 28px; }
+      .card { padding: 22px 16px 24px; }
+      .steps li:not(.current) .label { display: none; }
+      .steps li.current { flex: 4; }
+      .row { grid-template-columns: 1fr; }
+      .group h3 small { display: block; margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="intro">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 32 Q24 4 45 32"/><path d="M3 38h42"/><path d="M12 38V24M24 38V15M36 38V24" stroke-width="2.5"/>
+    </svg>
+    Sewa Setu
+  </a>
+  <h1>Check and submit</h1>
+  <p class="hi">जाँचें और जमा करें</p>
+  <p class="lead">This is the last step. Read everything once. If something is wrong, press "Change" next to it. After you submit, you get an Application Number.</p>
+  <div class="copy">&copy; 2026 Sewa Setu. All rights reserved.</div>
+</section>
+
+<main class="side">
+  <div class="card">
+    <ol class="steps" aria-label="Application progress">
+      <li class="done">1. <span class="label">Mobile</span></li>
+      <li class="done">2. <span class="label">Personal</span></li>
+      <li class="done">3. <span class="label">Address</span></li>
+      <li class="done">4. <span class="label">Bank</span></li>
+      <li class="done">5. <span class="label">Documents</span></li>
+      <li class="current" aria-current="step">6. <span class="label">Declaration</span></li>
+    </ol>
+
+    <h2>Please check your application before submitting</h2>
+    <p class="sub">जमा करने से पहले अपना आवेदन जाँच लें (चरण 6 / 6)</p>
+
+    <section class="group">
+      <header>
+        <h3>Personal details <small>व्यक्तिगत जानकारी</small></h3>
+        <a class="change" href="/form/1">Change<br><small style="font-weight:400">बदलें</small></a>
+      </header>
+      <dl>
+        <div class="row"><dt>Full name<small>पूरा नाम</small></dt><dd>{{ data.get('applicant_name','') or '-' }}</dd></div>
+        <div class="row"><dt>Date of birth<small>जन्म तिथि</small></dt><dd>{{ data.get('dob','') or '-' }}</dd></div>
+        <div class="row"><dt>Gender<small>लिंग</small></dt><dd>{{ data.get('gender','') or '-' }}</dd></div>
+        <div class="row"><dt>Marital status<small>वैवाहिक स्थिति</small></dt><dd>{{ data.get('marital_status','') or '-' }}</dd></div>
+        {% if data.get('marital_status') == 'Widowed' %}
+        <div class="row"><dt>Late husband's name<small>स्वर्गीय पति का नाम</small></dt><dd>{{ data.get('husband_name','') or '-' }}</dd></div>
+        {% endif %}
+      </dl>
+    </section>
+
+    <section class="group">
+      <header>
+        <h3>Address <small>पता</small></h3>
+        <a class="change" href="/form/2">Change<br><small style="font-weight:400">बदलें</small></a>
+      </header>
+      <dl>
+        <div class="row"><dt>Village / Town<small>गाँव / शहर</small></dt><dd>{{ data.get('village','') or '-' }}</dd></div>
+        <div class="row"><dt>Block<small>ब्लॉक</small></dt><dd>{{ data.get('block','') or '-' }}</dd></div>
+      </dl>
+    </section>
+
+    <section class="group">
+      <header>
+        <h3>Bank details <small>बैंक की जानकारी</small></h3>
+        <a class="change" href="/form/3">Change<br><small style="font-weight:400">बदलें</small></a>
+      </header>
+      <dl>
+        <div class="row"><dt>Bank account number<small>बैंक खाता संख्या</small></dt><dd>{{ data.get('bank_account','') or '-' }}</dd></div>
+        <div class="row"><dt>IFSC code<small>IFSC कोड</small></dt><dd>{{ data.get('ifsc','') or '-' }}</dd></div>
+      </dl>
+    </section>
+
+    <section class="group">
+      <header>
+        <h3>Age proof <small>उम्र का प्रमाण</small></h3>
+        <a class="change" href="/upload">Change<br><small style="font-weight:400">बदलें</small></a>
+      </header>
+      <dl>
+        <div class="row"><dt>Document uploaded<small>अपलोड किया दस्तावेज़</small></dt><dd{% if not doc_name %} class="empty"{% endif %}>{{ doc_name or 'Not uploaded / अपलोड नहीं हुआ' }}</dd></div>
+      </dl>
+    </section>
+
+    {% if errors %}
+    <div class="problems" role="alert">
+      <h3>This application cannot be submitted yet <small>/ आवेदन अभी जमा नहीं हो सकता</small></h3>
+      <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+      <p style="margin:8px 0 0">Fix these using the "Change" buttons above. / ऊपर "बदलें" दबाकर इन्हें ठीक करें।</p>
+    </div>
+    {% else %}
+    <div class="decl">
+      <h3>Declaration <small style="font-weight:400;color:#4b5563">/ घोषणा</small></h3>
+      <p>I hereby declare that the information furnished above is true to the best of my
+        knowledge and belief. I understand that furnishing false information is punishable
+        under applicable law and will result in cancellation of pension.</p>
+      <p class="hi-text">मैं घोषणा करता/करती हूँ कि ऊपर दी गई जानकारी मेरी जानकारी और विश्वास के अनुसार सही है। मैं समझता/समझती हूँ कि गलत जानकारी देना कानून के अनुसार दंडनीय है और इससे पेंशन रद्द कर दी जाएगी।</p>
+
+      <form method="post" id="submitForm">
+        <label class="agree" id="agreeBox">
+          <input type="checkbox" id="agree" required>
+          <span>I agree to the above declaration.<small>मैं ऊपर दी गई घोषणा से सहमत हूँ।</small></span>
+        </label>
+
+        <div class="msg" id="clientError" role="alert" hidden>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+          <p>Tick the box to agree before you submit.<small>जमा करने से पहले डिब्बे में टिक लगाएँ।</small></p>
+        </div>
+
+        <button class="btn" type="submit" id="go"><span>Submit Application<small>आवेदन जमा करें</small></span></button>
+      </form>
+      <p class="note">You cannot change the application after you submit it.<br>जमा करने के बाद आवेदन बदला नहीं जा सकता।</p>
+    </div>
+    {% endif %}
+  </div>
+</main>
+
+{% if not errors %}
+<script>
+  (function () {
+    var form = document.getElementById('submitForm');
+    var agree = document.getElementById('agree');
+    var agreeBox = document.getElementById('agreeBox');
+    var box = document.getElementById('clientError');
+    var go = document.getElementById('go');
+
+    function warn() {
+      box.hidden = false;
+      agreeBox.classList.add('bad');
+      agree.focus();
+    }
+    // replace the small browser tooltip with our own clear message
+    agree.addEventListener('invalid', function (e) { e.preventDefault(); warn(); });
+    agree.addEventListener('change', function () {
+      if (agree.checked) { box.hidden = true; agreeBox.classList.remove('bad'); }
+    });
+
+    form.addEventListener('submit', function (e) {
+      if (!agree.checked) { e.preventDefault(); warn(); return; }
+      go.disabled = true;                         // stop a double submission
+      go.firstElementChild.innerHTML = 'Submitting... please wait<small>जमा हो रहा है... कृपया रुकें</small>';
+    });
+  })();
+</script>
+{% endif %}
+</body>
+</html>

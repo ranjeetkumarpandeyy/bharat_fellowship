@@ -1,0 +1,2213 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+
+  <title>
+    Application {{ a[0] }} - Sewa Setu Officer Portal
+  </title>
+
+  <style>
+
+    :root {
+      --blue: #087fbd;
+      --blue-dark: #075f8f;
+      --blue-soft: #eaf5fb;
+
+      --navy: #123b63;
+
+      --ink: #17212b;
+      --muted: #5d6b78;
+
+      --page: #f3f6f9;
+      --card: #ffffff;
+
+      --line: #d6dee6;
+
+      --green: #167344;
+      --green-soft: #e8f6ee;
+
+      --amber: #946200;
+      --amber-soft: #fff5d9;
+
+      --red: #ad2d25;
+      --red-dark: #8b211b;
+      --red-soft: #fdeceb;
+
+      --grey-soft: #eef1f4;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      background: var(--page);
+
+      color: var(--ink);
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 16px;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================================================
+       PAGE LAYOUT
+       ========================================================= */
+
+    .admin-layout {
+      min-height: 100vh;
+
+      display: flex;
+    }
+
+
+    /* =========================================================
+       SIDEBAR
+       ========================================================= */
+
+    .sidebar {
+      width: 270px;
+
+      flex: 0 0 270px;
+
+      min-height: 100vh;
+
+      padding: 28px 20px;
+
+      background: var(--blue);
+
+      color: #ffffff;
+
+      display: flex;
+
+      flex-direction: column;
+
+      position: sticky;
+
+      top: 0;
+
+      height: 100vh;
+    }
+
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      padding: 0 8px;
+
+      color: #ffffff;
+
+      text-decoration: none;
+    }
+
+
+    .brand-icon {
+      width: 40px;
+
+      height: 40px;
+
+      flex: none;
+    }
+
+
+    .brand-name {
+      font-size: 25px;
+
+      line-height: 1.05;
+
+      font-weight: 800;
+    }
+
+
+    .brand-role {
+      display: block;
+
+      margin-top: 3px;
+
+      font-size: 13px;
+
+      font-weight: 500;
+
+      opacity: .88;
+    }
+
+
+    .sidebar-nav {
+      margin-top: 34px;
+    }
+
+
+    .nav-heading {
+      margin: 23px 8px 8px;
+
+      color: rgba(255,255,255,.72);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .06em;
+    }
+
+
+    .sidebar-nav a {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      min-height: 44px;
+
+      margin-bottom: 3px;
+
+      padding: 10px 12px;
+
+      border-radius: 7px;
+
+      color: #ffffff;
+
+      text-decoration: none;
+
+      font-size: 15px;
+
+      font-weight: 700;
+    }
+
+    .document-link {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #0b5d3b;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.document-link:hover {
+    background: #08482e;
+    text-decoration: none;
+}
+
+.muted {
+    color: #666;
+}
+
+    .sidebar-nav a:hover {
+      background: rgba(255,255,255,.13);
+    }
+
+
+    .sidebar-nav a.active {
+      background: rgba(255,255,255,.22);
+    }
+
+
+    .nav-dot {
+      width: 9px;
+
+      height: 9px;
+
+      flex: none;
+
+      border-radius: 50%;
+
+      background: #ffffff;
+    }
+
+
+    .nav-dot.pending {
+      background: #ffd34e;
+    }
+
+
+    .nav-dot.approved {
+      background: #7ee2a4;
+    }
+
+
+    .nav-dot.deemed {
+      background: #7ee2a4;
+    }
+
+
+    .nav-dot.rejected {
+      background: #ff9e9e;
+    }
+
+
+    .nav-dot.withdrawn {
+      background: #d3dce5;
+    }
+
+
+    .sidebar-footer {
+      margin-top: auto;
+
+      padding: 0 8px;
+
+      color: rgba(255,255,255,.72);
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       MAIN AREA
+       ========================================================= */
+
+    .main {
+      flex: 1;
+
+      min-width: 0;
+
+      padding: 30px 38px 60px;
+    }
+
+
+    .content {
+      width: 100%;
+
+      max-width: 1120px;
+
+      margin: 0 auto;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+       ========================================================= */
+
+    .topbar {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 22px;
+    }
+
+
+    .back-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      min-height: 42px;
+
+      padding: 8px 14px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 7px;
+
+      background: #ffffff;
+
+      color: var(--navy);
+
+      text-decoration: none;
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+
+    .back-link:hover {
+      background: #f6f9fb;
+
+      border-color: #b9c8d5;
+    }
+
+
+    .officer-label {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      font-weight: 600;
+    }
+
+
+    /* =========================================================
+       PAGE HEADER
+       ========================================================= */
+
+    .page-heading {
+      display: flex;
+
+      align-items: flex-start;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 24px;
+    }
+
+
+    .heading-title {
+      margin: 0;
+
+      color: var(--navy);
+
+      font-size: 31px;
+
+      line-height: 1.2;
+
+      font-weight: 800;
+    }
+
+
+    .heading-subtitle {
+      margin: 6px 0 0;
+
+      color: var(--muted);
+
+      font-size: 15px;
+    }
+
+
+    /* =========================================================
+       STATUS BADGES
+       ========================================================= */
+
+    .status-badge {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      padding: 8px 14px;
+
+      border-radius: 20px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      white-space: nowrap;
+    }
+
+
+    .status-badge::before {
+      content: "";
+
+      width: 8px;
+
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: currentColor;
+    }
+
+
+    .status-pending {
+      color: var(--amber);
+
+      background: var(--amber-soft);
+    }
+
+
+    .status-approved {
+      color: var(--green);
+
+      background: var(--green-soft);
+    }
+
+
+    .status-deemed {
+      color: var(--green);
+
+      background: var(--green-soft);
+    }
+
+
+    .status-rejected {
+      color: var(--red);
+
+      background: var(--red-soft);
+    }
+
+
+    .status-withdrawn {
+      color: #5f6c78;
+
+      background: var(--grey-soft);
+    }
+
+
+    /* =========================================================
+       APPLICATION SUMMARY
+       ========================================================= */
+
+    .application-banner {
+      display: grid;
+
+      grid-template-columns: 1fr auto;
+
+      gap: 20px;
+
+      align-items: center;
+
+      margin-bottom: 22px;
+
+      padding: 19px 22px;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+
+      border-left: 5px solid var(--blue);
+
+      border-radius: 8px;
+    }
+
+
+    .application-label {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .05em;
+    }
+
+
+    .application-number {
+      margin-top: 3px;
+
+      color: var(--navy);
+
+      font-size: 23px;
+
+      font-weight: 800;
+
+      letter-spacing: .02em;
+    }
+
+
+    .submission-info {
+      text-align: right;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.6;
+    }
+
+
+    .submission-info strong {
+      color: var(--ink);
+    }
+
+
+    /* =========================================================
+       INFORMATION GRID
+       ========================================================= */
+
+    .information-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 20px;
+
+      align-items: start;
+    }
+
+
+    .information-card {
+      overflow: hidden;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+
+      border-radius: 8px;
+    }
+
+
+    .card-heading {
+      margin: 0;
+
+      padding: 13px 17px;
+
+      background: #edf3f7;
+
+      border-bottom: 1px solid var(--line);
+
+      color: var(--navy);
+
+      font-size: 16px;
+
+      font-weight: 800;
+    }
+
+
+    .card-heading small {
+      display: block;
+
+      margin-top: 1px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      font-weight: 500;
+    }
+
+
+    .details {
+      margin: 0;
+    }
+
+
+    .detail-row {
+      display: grid;
+
+      grid-template-columns: 38% 62%;
+
+      padding: 12px 17px;
+
+      border-bottom: 1px solid #e7ebef;
+
+      gap: 12px;
+    }
+
+
+    .detail-row:last-child {
+      border-bottom: 0;
+    }
+
+
+    .detail-label {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      font-weight: 600;
+    }
+
+
+    .detail-value {
+      color: var(--ink);
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      word-break: break-word;
+    }
+
+
+    .detail-value.number {
+      font-variant-numeric: tabular-nums;
+
+      letter-spacing: .02em;
+    }
+
+
+    /* =========================================================
+       DOCUMENT
+       ========================================================= */
+
+    .document-name {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Age proof document button */
+.document-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 9px 14px;
+  border-radius: 6px;
+  background: var(--blue);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.document-link:hover {
+  background: var(--blue-dark);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.document-link:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+}
+
+.document-note {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+    /* =========================================================
+       DECISION SECTION
+       ========================================================= */
+
+    .section-heading {
+      margin: 32px 0 4px;
+
+      color: var(--navy);
+
+      font-size: 22px;
+
+      line-height: 1.25;
+
+      font-weight: 800;
+    }
+
+
+    .section-description {
+      margin: 0 0 15px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    .decision-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 20px;
+    }
+
+
+    .decision-card {
+      padding: 21px;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+
+      border-radius: 8px;
+    }
+
+
+    .decision-card.approve {
+      border-top: 5px solid var(--green);
+    }
+
+
+    .decision-card.reject {
+      border-top: 5px solid var(--red);
+    }
+
+
+    .decision-title {
+      margin: 0;
+
+      color: var(--ink);
+
+      font-size: 19px;
+
+      font-weight: 800;
+    }
+
+
+    .decision-description {
+      margin: 4px 0 16px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    .form-label {
+      display: block;
+
+      margin: 0 0 6px;
+
+      color: var(--ink);
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+
+    .form-label .optional {
+      color: var(--muted);
+
+      font-weight: 400;
+    }
+
+
+    .form-input {
+      width: 100%;
+
+      min-height: 50px;
+
+      padding: 10px 13px;
+
+      border: 2px solid #7b8793;
+
+      border-radius: 7px;
+
+      background: #ffffff;
+
+      color: var(--ink);
+
+      font-family: inherit;
+
+      font-size: 15px;
+
+      outline: none;
+    }
+
+
+    .form-input:focus {
+      border-color: var(--blue);
+
+      box-shadow:
+        0 0 0 3px rgba(8,127,189,.12);
+    }
+
+
+    .form-input.error {
+      border-color: var(--red);
+
+      background: #fff8f7;
+    }
+
+
+    .error-message {
+      margin: 7px 0 0;
+
+      color: var(--red);
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+
+    .error-message[hidden] {
+      display: none;
+    }
+
+
+    .decision-button {
+      width: 100%;
+
+      min-height: 52px;
+
+      margin-top: 15px;
+
+      border: none;
+
+      border-radius: 7px;
+
+      color: #ffffff;
+
+      font-family: inherit;
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .decision-button.approve {
+      background: var(--green);
+    }
+
+
+    .decision-button.approve:hover {
+      background: #105c36;
+    }
+
+
+    .decision-button.reject {
+      background: var(--red);
+    }
+
+
+    .decision-button.reject:hover {
+      background: var(--red-dark);
+    }
+
+
+    .decision-button:disabled {
+      background: #8d98a4;
+
+      cursor: wait;
+    }
+
+
+    /* =========================================================
+       ALREADY DECIDED
+       ========================================================= */
+
+    .decision-complete {
+      margin-top: 28px;
+
+      padding: 18px 20px;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+
+      border-radius: 8px;
+    }
+
+
+    .decision-complete strong {
+      color: var(--navy);
+
+      font-size: 16px;
+    }
+
+
+    .decision-complete p {
+      margin: 5px 0 0;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    /* =========================================================
+       AUDIT TRAIL
+       ========================================================= */
+
+    .audit-section {
+      margin-top: 32px;
+    }
+
+
+    .audit-card {
+      overflow: hidden;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+
+      border-radius: 8px;
+    }
+
+
+    .audit-scroll {
+      overflow-x: auto;
+    }
+
+
+    .audit-table {
+      width: 100%;
+
+      min-width: 650px;
+
+      border-collapse: collapse;
+    }
+
+
+    .audit-table th {
+      padding: 12px 15px;
+
+      background: #edf3f7;
+
+      color: var(--muted);
+
+      border-bottom: 1px solid var(--line);
+
+      text-align: left;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: .03em;
+    }
+
+
+    .audit-table td {
+      padding: 13px 15px;
+
+      border-bottom: 1px solid #e7ebef;
+
+      color: var(--ink);
+
+      font-size: 13px;
+
+      vertical-align: top;
+    }
+
+
+    .audit-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+
+    .audit-time {
+      white-space: nowrap;
+
+      color: var(--muted);
+    }
+
+
+    .audit-action {
+      font-weight: 800;
+    }
+
+
+    .audit-actor {
+      font-weight: 700;
+    }
+
+
+    .empty-audit {
+      margin: 0;
+
+      padding: 25px;
+
+      color: var(--muted);
+
+      text-align: center;
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 950px) {
+
+      .admin-layout {
+        display: block;
+      }
+
+
+      .sidebar {
+        width: 100%;
+
+        min-height: auto;
+
+        height: auto;
+
+        position: static;
+
+        padding: 15px;
+      }
+
+
+      .sidebar-nav {
+        margin-top: 15px;
+
+        overflow-x: auto;
+      }
+
+
+      .sidebar-nav ul {
+        display: flex;
+
+        gap: 6px;
+
+        margin: 0;
+
+        padding: 0;
+
+        list-style: none;
+      }
+
+
+      .nav-heading {
+        display: none;
+      }
+
+
+      .sidebar-nav a {
+        white-space: nowrap;
+
+        background: rgba(255,255,255,.10);
+
+        margin: 0;
+      }
+
+
+      .sidebar-footer {
+        display: none;
+      }
+
+
+      .main {
+        padding: 22px 14px 45px;
+      }
+
+
+      .information-grid,
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .page-heading {
+        flex-direction: column;
+      }
+
+
+      .application-banner {
+        grid-template-columns: 1fr;
+      }
+
+
+      .submission-info {
+        text-align: left;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .brand-name {
+        font-size: 22px;
+      }
+
+
+      .heading-title {
+        font-size: 26px;
+      }
+
+
+      .application-number {
+        font-size: 20px;
+      }
+
+
+      .detail-row {
+        grid-template-columns: 1fr;
+
+        gap: 3px;
+      }
+
+
+      .decision-card {
+        padding: 17px;
+      }
+
+    }
+
+
+    /* =========================================================
+       ACCESSIBILITY
+       ========================================================= */
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #f59e0b;
+
+      outline-offset: 3px;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-layout">
+
+
+  <!-- ========================================================
+       SIDEBAR
+       ======================================================== -->
+
+  <aside class="sidebar">
+
+
+    <a
+      class="brand"
+      href="/admin/dashboard"
+      aria-label="Sewa Setu Officer Dashboard">
+
+
+      <svg
+        class="brand-icon"
+        viewBox="0 0 48 48"
+        fill="none"
+        stroke="#fff"
+        stroke-width="3"
+        stroke-linecap="round"
+        aria-hidden="true">
+
+        <path d="M3 32 Q24 4 45 32"/>
+
+        <path d="M3 38h42"/>
+
+        <path
+          d="M12 38V24M24 38V15M36 38V24"
+          stroke-width="2.5"/>
+
+      </svg>
+
+
+      <span>
+
+        <span class="brand-name">
+          Sewa Setu
+        </span>
+
+        <span class="brand-role">
+          Officer Portal
+        </span>
+
+      </span>
+
+    </a>
+
+
+
+    <nav
+      class="sidebar-nav"
+      aria-label="Officer navigation">
+
+
+      <ul
+        style="
+          list-style:none;
+          margin:0;
+          padding:0;
+        ">
+
+
+        <li>
+
+          <a href="/admin/dashboard">
+
+            Dashboard
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-heading">
+          Applications
+        </li>
+
+
+        <li>
+
+          <a
+            href="/admin/applications?status=PENDING"
+            {% if a[11] == 'PENDING' %}
+              aria-current="page"
+              class="active"
+            {% endif %}>
+
+            <i class="nav-dot pending"></i>
+
+            Pending
+
+          </a>
+
+        </li>
+
+
+        <li>
+
+          <a
+            href="/admin/applications?status=APPROVED"
+            {% if a[11] == 'APPROVED' %}
+              aria-current="page"
+              class="active"
+            {% endif %}>
+
+            <i class="nav-dot approved"></i>
+
+            Approved
+
+          </a>
+
+        </li>
+
+
+        <li>
+
+          <a
+            href="/admin/applications?status=DEEMED_APPROVED"
+            {% if a[11] == 'DEEMED_APPROVED' %}
+              aria-current="page"
+              class="active"
+            {% endif %}>
+
+            <i class="nav-dot deemed"></i>
+
+            Deemed Approved
+
+          </a>
+
+        </li>
+
+
+        <li>
+
+          <a
+            href="/admin/applications?status=REJECTED"
+            {% if a[11] == 'REJECTED' %}
+              aria-current="page"
+              class="active"
+            {% endif %}>
+
+            <i class="nav-dot rejected"></i>
+
+            Rejected
+
+          </a>
+
+        </li>
+
+
+        <li>
+
+          <a
+            href="/admin/applications?status=WITHDRAWN"
+            {% if a[11] == 'WITHDRAWN' %}
+              aria-current="page"
+              class="active"
+            {% endif %}>
+
+            <i class="nav-dot withdrawn"></i>
+
+            Withdrawn
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-heading">
+          Programme
+        </li>
+
+
+        <li>
+
+          <a href="/admin/tokens">
+
+            Program tokens
+
+          </a>
+
+        </li>
+
+
+      </ul>
+
+    </nav>
+
+
+
+    <div class="sidebar-footer">
+
+      © 2026 Sewa Setu
+
+    </div>
+
+
+  </aside>
+
+
+
+  <!-- ========================================================
+       MAIN CONTENT
+       ======================================================== -->
+
+  <main class="main">
+
+    <div class="content">
+
+
+      <!-- TOP BAR -->
+
+      <div class="topbar">
+
+        <a
+          class="back-link"
+          href="/admin/applications?status={{ a[11] }}">
+
+          <span aria-hidden="true">
+            ←
+          </span>
+
+          Back to applications
+
+        </a>
+
+
+        <div class="officer-label">
+
+          Department of Social Welfare
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           PAGE HEADER
+           ====================================================== -->
+
+      <div class="page-heading">
+
+        <div>
+
+          <h1 class="heading-title">
+
+            Application Details
+
+          </h1>
+
+
+          <p class="heading-subtitle">
+
+            Review the applicant information and application record.
+
+          </p>
+
+        </div>
+
+
+        {% if a[11] == 'PENDING' %}
+
+          <span class="status-badge status-pending">
+            Pending
+          </span>
+
+        {% elif a[11] == 'APPROVED' %}
+
+          <span class="status-badge status-approved">
+            Approved
+          </span>
+
+        {% elif a[11] == 'DEEMED_APPROVED' %}
+
+          <span class="status-badge status-deemed">
+            Deemed Approved
+          </span>
+
+        {% elif a[11] == 'REJECTED' %}
+
+          <span class="status-badge status-rejected">
+            Rejected
+          </span>
+
+        {% elif a[11] == 'WITHDRAWN' %}
+
+          <span class="status-badge status-withdrawn">
+            Withdrawn
+          </span>
+
+        {% else %}
+
+          <span class="status-badge">
+            {{ a[11] }}
+
+          </span>
+
+        {% endif %}
+
+      </div>
+
+
+
+      <!-- ======================================================
+           APPLICATION SUMMARY
+           ====================================================== -->
+
+      <section class="application-banner">
+
+
+        <div>
+
+          <div class="application-label">
+            Application Number
+          </div>
+
+          <div class="application-number">
+            {{ a[0] }}
+          </div>
+
+        </div>
+
+
+        <div class="submission-info">
+
+          <div>
+            <strong>Submitted:</strong>
+            {{ a[12] }}
+          </div>
+
+
+          {% if a[13] %}
+
+            <div>
+
+              <strong>Decision:</strong>
+              {{ a[13] }}
+
+              {% if a[14] %}
+
+                by {{ a[14] }}
+
+              {% endif %}
+
+            </div>
+
+          {% endif %}
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ======================================================
+           APPLICANT INFORMATION
+           ====================================================== -->
+
+      <div class="information-grid">
+
+
+        <!-- APPLICANT -->
+
+        <section class="information-card">
+
+          <h2 class="card-heading">
+
+            Applicant Information
+
+            <small>
+              आवेदक की जानकारी
+            </small>
+
+          </h2>
+
+
+          <div class="details">
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Applicant Name
+              </div>
+
+              <div class="detail-value">
+                {{ a[1] }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Mobile Number
+              </div>
+
+              <div class="detail-value number">
+                {{ a[2] }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Date of Birth
+              </div>
+
+              <div class="detail-value">
+                {{ a[3] }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Gender
+              </div>
+
+              <div class="detail-value">
+                {{ a[4] }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Marital Status
+              </div>
+
+              <div class="detail-value">
+                {{ a[5] }}
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </section>
+
+
+
+        <!-- ADDRESS / BANK -->
+
+        <section class="information-card">
+
+          <h2 class="card-heading">
+
+            Address &amp; Bank Details
+
+            <small>
+              पता और बैंक की जानकारी
+            </small>
+
+          </h2>
+
+
+          <div class="details">
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Village
+              </div>
+
+              <div class="detail-value">
+                {{ a[6] }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Block
+              </div>
+
+              <div class="detail-value">
+                {{ a[7] }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                Bank Account
+              </div>
+
+              <div class="detail-value number">
+                {{ a[8] }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-label">
+                IFSC Code
+              </div>
+
+              <div class="detail-value number">
+                {{ a[9] or '-' }}
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+  <div class="detail-label">
+    Age Proof
+  </div>
+
+  <div class="detail-value">
+
+    {% if a[10] %}
+
+      <a
+        class="document-link"
+        href="{{ url_for('admin_application_document', app_id=app_id) }}"
+        target="_blank"
+        rel="noopener"
+        aria-label="View age proof document for application {{ a[0] }}"
+      >
+        <span aria-hidden="true">📄</span>
+        View Age Proof
+      </a>
+
+      <span class="document-note">
+        Opens the uploaded document in a new tab.
+      </span>
+
+    {% else %}
+
+      <span class="document-name">
+        No document uploaded
+      </span>
+
+    {% endif %}
+
+  </div>
+</div>
+
+
+          </div>
+
+        </section>
+
+
+      </div>
+
+
+
+      <!-- ======================================================
+           DECISION
+           ====================================================== -->
+
+      {% if a[11] == 'PENDING' %}
+
+
+        <h2 class="section-heading">
+          Officer Decision
+        </h2>
+
+
+        <p class="section-description">
+
+          Review the application carefully before making a decision.
+          Your decision and reason will be recorded in the audit trail.
+
+        </p>
+
+
+        <div class="decision-grid">
+
+
+          <!-- APPROVE -->
+
+          <section class="decision-card approve">
+
+
+            <h3 class="decision-title">
+              Approve Application
+            </h3>
+
+
+            <p class="decision-description">
+
+              Approve this application if the applicant meets
+              all scheme requirements.
+
+            </p>
+
+
+            <form
+              method="post"
+              action="/admin/approve/{{ app_id }}"
+              id="approveForm">
+
+
+              <label
+                class="form-label"
+                for="noteA">
+
+                Officer Note
+
+                <span class="optional">
+                  (optional)
+                </span>
+
+              </label>
+
+
+              <input
+                class="form-input"
+                type="text"
+                id="noteA"
+                name="note"
+                autocomplete="off"
+                placeholder="Add a note if required">
+
+
+              <button
+                class="decision-button approve"
+                type="submit">
+
+                Approve Application
+
+              </button>
+
+
+            </form>
+
+
+          </section>
+
+
+
+          <!-- REJECT -->
+
+          <section class="decision-card reject">
+
+
+            <h3 class="decision-title">
+              Reject Application
+            </h3>
+
+
+            <p class="decision-description">
+
+              Provide a clear reason before rejecting
+              the application.
+
+            </p>
+
+
+            <form
+              method="post"
+              action="/admin/reject/{{ app_id }}"
+              id="rejectForm"
+              novalidate>
+
+
+              <label
+                class="form-label"
+                for="noteR">
+
+                Reason for Rejection
+
+                <span style="color:#ad2d25;">
+                  *
+                </span>
+
+              </label>
+
+
+              <input
+                class="form-input"
+                type="text"
+                id="noteR"
+                name="note"
+                autocomplete="off"
+                placeholder="Enter the reason for rejection">
+
+
+              <div
+                class="error-message"
+                id="rejectErr"
+                hidden>
+
+                Please enter a reason before rejecting.
+
+              </div>
+
+
+              <button
+                class="decision-button reject"
+                type="submit">
+
+                Reject Application
+
+              </button>
+
+
+            </form>
+
+
+          </section>
+
+
+        </div>
+
+
+      {% else %}
+
+
+        <!-- DECISION ALREADY MADE -->
+
+        <section class="decision-complete">
+
+          <strong>
+            No further decision is required for this application.
+          </strong>
+
+
+          <p>
+
+            Current application status:
+            <strong>{{ a[11]|replace('_', ' ')|title }}</strong>.
+
+            {% if a[13] %}
+
+              Decision recorded on {{ a[13] }}.
+
+            {% endif %}
+
+            {% if a[14] %}
+
+              Recorded by {{ a[14] }}.
+
+            {% endif %}
+
+          </p>
+
+        </section>
+
+
+      {% endif %}
+
+
+
+      <!-- ======================================================
+           AUDIT TRAIL
+           ====================================================== -->
+
+      <section class="audit-section">
+
+
+        <h2 class="section-heading">
+          Audit Trail
+        </h2>
+
+
+        <p class="section-description">
+
+          A record of actions taken on this application.
+
+        </p>
+
+
+        <div class="audit-card">
+
+
+          {% if audit %}
+
+
+            <div class="audit-scroll">
+
+
+              <table class="audit-table">
+
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Date &amp; Time
+                    </th>
+
+                    <th>
+                      Action
+                    </th>
+
+                    <th>
+                      Officer / User
+                    </th>
+
+                    <th>
+                      Note
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                  {% for at, action, actor, note in audit %}
+
+                    <tr>
+
+                      <td class="audit-time">
+                        {{ at }}
+                      </td>
+
+                      <td class="audit-action">
+                        {{ action }}
+                      </td>
+
+                      <td class="audit-actor">
+                        {{ actor }}
+                      </td>
+
+                      <td>
+                        {{ note or '-' }}
+                      </td>
+
+                    </tr>
+
+                  {% endfor %}
+
+
+                </tbody>
+
+
+              </table>
+
+
+            </div>
+
+
+          {% else %}
+
+
+            <p class="empty-audit">
+
+              No audit entries are available for this application.
+
+            </p>
+
+
+          {% endif %}
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+</div>
+
+
+
+<!-- ============================================================
+     DECISION JAVASCRIPT
+     ============================================================ -->
+
+{% if a[11] == 'PENDING' %}
+
+<script>
+
+(function () {
+
+  const approveForm =
+    document.getElementById("approveForm");
+
+  const rejectForm =
+    document.getElementById("rejectForm");
+
+  const noteR =
+    document.getElementById("noteR");
+
+  const rejectErr =
+    document.getElementById("rejectErr");
+
+  const applicationNumber =
+    {{ a[0]|tojson }};
+
+
+  /* ==========================================================
+     APPROVE
+     ========================================================== */
+
+  approveForm.addEventListener(
+    "submit",
+    function (event) {
+
+      const confirmed =
+        confirm(
+          "Approve application " +
+          applicationNumber +
+          "?"
+        );
+
+
+      if (!confirmed) {
+
+        event.preventDefault();
+
+        return;
+
+      }
+
+
+      const button =
+        approveForm.querySelector("button");
+
+      button.disabled = true;
+
+      button.textContent =
+        "Approving...";
+
+    }
+  );
+
+
+  /* ==========================================================
+     REJECTION INPUT
+     ========================================================== */
+
+  noteR.addEventListener(
+    "input",
+    function () {
+
+      noteR.classList.remove("error");
+
+      rejectErr.hidden = true;
+
+    }
+  );
+
+
+  /* ==========================================================
+     REJECT
+     ========================================================== */
+
+  rejectForm.addEventListener(
+    "submit",
+    function (event) {
+
+      const reason =
+        noteR.value.trim();
+
+
+      if (!reason) {
+
+        event.preventDefault();
+
+        noteR.classList.add("error");
+
+        rejectErr.hidden = false;
+
+        noteR.focus();
+
+        return;
+
+      }
+
+
+      const confirmed =
+        confirm(
+          "Reject application " +
+          applicationNumber +
+          "?\n\n" +
+          "This action cannot be undone."
+        );
+
+
+      if (!confirmed) {
+
+        event.preventDefault();
+
+        return;
+
+      }
+
+
+      const button =
+        rejectForm.querySelector("button");
+
+      button.disabled = true;
+
+      button.textContent =
+        "Rejecting...";
+
+    }
+  );
+
+
+})();
+
+</script>
+
+{% endif %}
+
+
+</body>
+
+</html>

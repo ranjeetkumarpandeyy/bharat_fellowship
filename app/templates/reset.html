@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reset Password - Sewa Setu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --blue: #0284c7; --blue-deep: #026aa2; --ink: #111827; --muted: #4b5563;
+      --page: #f3f6fa; --line: #d5dbe5; --field: #6b7586;
+      --red: #b42318; --red-wash: #fdecea;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; font: 400 20px/1.55 "Mukta", system-ui, sans-serif; color: var(--ink); }
+
+    /* left panel */
+    .intro { flex: 1 1 42%; background: var(--blue); color: #fff; padding: 56px 56px 40px; display: flex; flex-direction: column; }
+    .logo { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-size: 2rem; font-weight: 700; }
+    .logo svg { width: 46px; height: 46px; }
+    .intro h1 { margin: auto 0 0; padding-top: 48px; font-size: 2.6rem; line-height: 1.15; font-weight: 700; }
+    .intro .hi { margin: 8px 0 0; font-size: 1.4rem; font-weight: 600; }
+    .intro .lead { margin: 20px 0 auto; max-width: 28em; font-size: 1.1rem; }
+    .copy { margin-top: 36px; font-size: .9rem; opacity: .75; }
+
+    /* right card */
+    .side { flex: 1 1 58%; background: var(--page); padding: 28px; display: flex; align-items: center; justify-content: center; }
+    .card { width: 100%; max-width: 560px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 36px 30px; box-shadow: 0 2px 10px rgba(17,24,39,.07); }
+
+    .back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 18px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); text-decoration: none; font-size: .95rem; font-weight: 600; background: #fff; }
+    .back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .back:hover { background: #f3f6fa; }
+
+    h2 { margin: 0; font-size: 1.8rem; line-height: 1.2; font-weight: 700; }
+    .sub { margin: 2px 0 6px; color: var(--muted); }
+
+    .msg { display: flex; gap: 10px; margin: 14px 0 4px; padding: 12px 14px; border-radius: 10px; background: var(--red-wash); border: 1px solid #efb1aa; color: #6b1a12; }
+    .msg svg { flex: none; width: 24px; height: 24px; margin-top: 3px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .msg p { margin: 0; }
+    .msg small { display: block; font-size: .95rem; }
+    .msg[hidden] { display: none; }
+
+    label { display: block; margin: 22px 0 4px; font-weight: 700; }
+    label small { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; }
+    input[type=tel] {
+      display: block; width: 100%; min-height: 58px; padding: 8px 14px;
+      font: inherit; font-size: 1.3rem; letter-spacing: .08em; color: var(--ink);
+      background: #fff; border: 2px solid var(--field); border-radius: 10px;
+    }
+    input:focus { border-color: var(--blue); }
+    input.bad { border-color: var(--red); background: #fff8f7; }
+    :focus-visible { outline: 4px solid #f59e0b; outline-offset: 2px; }
+
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 64px; margin-top: 24px; padding: 10px 18px; border: 0; border-radius: 10px; background: var(--blue); color: #fff; font: 700 1.25rem/1.2 inherit; font-family: inherit; cursor: pointer; }
+    .btn:hover { background: var(--blue-deep); }
+    .btn:disabled { background: #7aa7be; cursor: wait; }
+    .btn small { display: block; font-size: .95rem; font-weight: 400; }
+
+    .alt { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: .98rem; }
+    .alt a { color: var(--blue-deep); font-weight: 700; }
+
+    @media (max-width: 860px) {
+      body { flex-direction: column; font-size: 19px; }
+      .intro { padding: 24px 22px 26px; }
+      .intro h1 { margin: 0; padding-top: 22px; font-size: 1.9rem; }
+      .intro .hi { font-size: 1.15rem; }
+      .intro .lead, .copy { display: none; }
+      .side { padding: 14px 12px 28px; align-items: flex-start; }
+      .card { padding: 22px 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="intro">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 32 Q24 4 45 32"/><path d="M3 38h42"/><path d="M12 38V24M24 38V15M36 38V24" stroke-width="2.5"/>
+    </svg>
+    Sewa Setu
+  </a>
+  <h1>Forgot your password?</h1>
+  <p class="hi">पासवर्ड भूल गए?</p>
+  <p class="lead">No problem. Enter the mobile number you used when you applied for the pension.</p>
+  <div class="copy">&copy; 2026 Sewa Setu. All rights reserved.</div>
+</section>
+
+<main class="side">
+  <div class="card">
+    <a class="back" href="/status"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Back to login</a>
+
+    <h2>Reset password</h2>
+    <p class="sub">पासवर्ड बदलें</p>
+
+    {# error or notice from the server, or flash(), if your Flask code sends one #}
+    {% set flashed = get_flashed_messages() %}
+    {% if error or flashed %}
+    <div class="msg" role="alert">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p>{% if error %}{{ error }}{% else %}{{ flashed[0] }}{% endif %}</p>
+    </div>
+    {% endif %}
+
+    <div class="msg" id="clientError" role="alert" hidden>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p>Enter a 10 digit mobile number.<small>10 अंकों का मोबाइल नंबर लिखें।</small></p>
+    </div>
+
+    <form method="post" id="resetForm" novalidate>
+      <label for="mobile">Registered mobile number
+        <small>The number you used to apply &middot; जिस नंबर से आवेदन किया</small>
+      </label>
+      <input type="tel" id="mobile" name="mobile" maxlength="10"
+             inputmode="numeric" autocomplete="username" placeholder="98XXXXXXXX" autofocus>
+
+      <button class="btn" type="submit" id="go"><span>Reset Password<small>पासवर्ड बदलें</small></span></button>
+    </form>
+
+    <p class="alt">Remembered it? <a href="/status">Go back to login</a><br>
+      याद आ गया? <a href="/status">लॉगिन पर वापस जाएँ</a></p>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById('resetForm');
+    var mobile = document.getElementById('mobile');
+    var box = document.getElementById('clientError');
+    var go = document.getElementById('go');
+
+    mobile.addEventListener('input', function () {
+      mobile.value = mobile.value.replace(/\D/g, '');
+      mobile.classList.remove('bad'); box.hidden = true;
+    });
+
+    form.addEventListener('submit', function (e) {
+      if (!/^[6-9]\d{9}$/.test(mobile.value)) {
+        e.preventDefault();
+        box.hidden = false; mobile.classList.add('bad'); mobile.focus();
+        return;
+      }
+      go.disabled = true;   // stop repeat taps from sending several resets
+      go.firstElementChild.innerHTML = 'Please wait...<small>कृपया रुकें...</small>';
+    });
+  })();
+</script>
+</body>
+</html>
