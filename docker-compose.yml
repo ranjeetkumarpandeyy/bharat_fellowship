@@ -18,12 +18,15 @@ services:
       ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-change-me-before-deploying}
       PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8000}
+      AGENT_INTERNAL_SECRET: ${AGENT_INTERNAL_SECRET:-change-this-secret}
+      AGENT_ENABLED_BLOCKS: ${AGENT_ENABLED_BLOCKS:-Sonari,Rajapara}
     depends_on:
       - db
       - smsgw
     volumes:
       - uploads:/var/sewasetu/uploads
       - applogs:/var/log/sewasetu
+      - ./evals:/app/evals
 
   scheduler:
     build: ./app
@@ -49,12 +52,30 @@ services:
       dockerfile: Dockerfile
     environment:
       PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8000}
+      PORTAL_BASE_URL: ${PORTAL_BASE_URL:-http://app:8000}
       CITIZEN_MCP_URL: ${CITIZEN_MCP_URL:-http://localhost:8101}
       AGENT_INTERNAL_SECRET: ${AGENT_INTERNAL_SECRET:-change-this-secret}
       AGENT_ENABLED_BLOCKS: ${AGENT_ENABLED_BLOCKS:-Sonari,Rajapara}
       PORT: 8101
     ports:
       - "8101:8101"
+    depends_on:
+      - app
+
+  officer-mcp:
+    build:
+      context: ./mcp
+      dockerfile: Dockerfile
+    environment:
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8000}
+      PORTAL_BASE_URL: ${PORTAL_BASE_URL:-http://app:8000}
+      OFFICER_MCP_URL: ${OFFICER_MCP_URL:-http://localhost:8102}
+      AGENT_INTERNAL_SECRET: ${AGENT_INTERNAL_SECRET:-change-this-secret}
+      AGENT_ENABLED_BLOCKS: ${AGENT_ENABLED_BLOCKS:-Sonari,Rajapara}
+      PORT: 8102
+    command: ["python", "-m", "agent_mcp.officer_server"]
+    ports:
+      - "8102:8102"
     depends_on:
       - app
 
